@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Props file for converting Vita CG files into includable source -->
+<!-- Copyright Rebecca Ann Heineman -->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- Build after CustomBuild, but before C# and C++ -->
+	<PropertyGroup
+		Condition="'$(VitaCGBeforeTargets)' == '' and '$(VitaCGAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+		<VitaCGCompileBeforeTargets>Midl</VitaCGCompileBeforeTargets>
+		<VitaCGCompileAfterTargets>CustomBuild</VitaCGCompileAfterTargets>
+	</PropertyGroup>
+	
+	<!-- Defaults and the command line to invoke -->
+	<ItemDefinitionGroup>
+		<VitaCGCompile>
+			<!-- -profile <profile> target profile -->
+			<TargetProfile>sce_fp_psp2</TargetProfile>
+
+			<!-- -object <filename> Explicitly sets the output file name. -->
+			<!-- ObjectFileName>$(IntDir)%(FileName).o</ObjectFileName -->
+
+			<!-- -I<directory> Add <directory> to the search paths. -->
+			<!-- AdditionalIncludeDirectories></AdditionalIncludeDirectories -->
+
+			<!-- -include <file> Includes <file> before the primary source file. -->
+			<!-- ForcedIncludeFiles></ForcedIncludeFiles -->
+
+			<!-- -D<name>[=<value>] Defines a macro called <name>. -->
+			<!-- PreprocessorDefinitions></PreprocessorDefinitions -->
+
+			<!-- -entry <function> entrypoint name -->
+			<!-- EntryPointName>main</EntryPointName -->
+
+			<!-- -nostdlib Disables the standard library. -->
+			<DisableStdlib>false</DisableStdlib>
+
+			<!-- -W<level> Warning level (0-4). Default: 1 -->
+			<WarningLevel>4</WarningLevel>
+			
+			<!-- -Wperf Enables warnings about potential performance hazards. -->
+			<PerfWarnings>false</PerfWarnings>
+			
+			<!-- -Werror Treats warnings as errors. -->
+			<WarningsAreErrors>false</WarningsAreErrors>
+			
+			<!-- -Wsuppress=id[,id...] Suppress specified warnings. -->
+			<DisableSpecificWarnings></DisableSpecificWarnings>
+			
+			<!-- -pedantic, -pedantic-error Warns/errors about extensions being used. -->
+			<Pendantic>Default</Pendantic>
+			
+			<!-- -fx, -nofx Enables/Disables CgFX support. -->
+			<CgFX>Default</CgFX>
+
+			<!-- -O<level> Optimization level (0-4). Default: 3 -->
+			<Optimization>4</Optimization>
+
+			<!-- -nofastmath Disables algebraic transforms. -->
+			<NoFastMath>false</NoFastMath>
+
+			<!-- -fastprecision, -bestprecision Precision control -->
+			<Precision>Default</Precision>
+		
+			<!-- -nofastint Forces all float to int conversions to full precision. -->
+			<NoFastInteger>false</NoFastInteger>
+
+			<!-- -invpos Generate a position invariant vertex program -->
+			<PositionInvariant>false</PositionInvariant>
+
+			<!-- -lang <locale> Language for compiler messages. -->
+			<Language>en</Language>
+
+			<!-- -nocolor Disables colored warnings/errors. -->
+			<DisableColorWarnings>false</DisableColorWarnings>
+
+			<!-- -E Performs pre-processing only. -->
+			<PerformPreprocessing>false</PerformPreprocessing>
+
+			<!-- -P When used with -E, disables #line directives. -->
+			<DisableLineDirectives>false</DisableLineDirectives>
+
+			<!-- -C When used with -E, preserves comments. -->
+			<PreserveComments>false</PreserveComments>
+
+			<!-- -MD Outputs a dependency file alongside the shader binary. -->
+			<DependencyFile>false</DependencyFile>
+			
+			<!-- -MP Emits phony targets in dependency files. -->
+			<PhonyTargets>false</PhonyTargets>
+
+			<!-- -MF <file> Specifies the name of the output dependency file. -->
+			<DependencyFileName>$(IntDir)%(FileName).d</DependencyFileName>
+
+			<!-- -MT <target> Sets the target name of the dependency rule. -->
+			<!-- DependencyTarget></DependencyTarget -->
+
+			<!-- -MG Ignores missing files during dependency generation. -->
+			<IgnoreMissing>false</IgnoreMissing>
+
+			<!-- -cache, -xmlcache Outputs a Cg cache file for shader association. -->
+			<CgCache>None</CgCache>
+
+			<!-- -cachedir <path> Specifies the path SDB files are written to. -->
+			<CacheDir>$(IntDir)</CacheDir>
+
+			<!-- -sdb <path> Specifies the SDB filename. -->
+			<SDBFilename>$(IntDir)%(FileName).sdb</SDBFilename>
+			
+			<!-- -xmlsdb <path> Specifies the SDB filename in xml form. -->
+			<SDBFilenameXML>$(IntDir)%(FileName).xml</SDBFilenameXML>
+
+			<!-- -label <name> use <name> as variable name in header file -->
+			<VariableName>g_%(FileName)</VariableName>
+
+			<!-- -header <file> output header file containing object code -->
+			<HeaderFileName>%(RootDir)%(Directory)%(FileName).h</HeaderFileName>
+
+			<!-- The tool should be executed -->
+			<CommandLineTemplate>"$(MSBuildThisFileDirectory)vitacgdispatcher.cmd" -gxp "$(IntDir)%(FileName).gxp" [Inputs] [AllOptions] [AdditionalOptions]</CommandLineTemplate>
+
+			<!-- Line to print in Visual Studio's output -->
+			<ExecutionDescription>psp2cgc %(FileName)%(Extension)...</ExecutionDescription>
+		</VitaCGCompile>
+	</ItemDefinitionGroup>
+</Project>

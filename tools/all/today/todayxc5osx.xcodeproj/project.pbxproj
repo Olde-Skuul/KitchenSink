@@ -1,0 +1,244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		319DAC5D53C5EBDE68655780 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */; };
+		32139A1D805F71E1FF773B68 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061B328817055E8B2E193D6 /* AppKit.framework */; };
+		458701610073C7A6CB29DD2F /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB663B78C243F425CB5F622D /* IOKit.framework */; };
+		A12134D815CEF406E415857B /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60566A081602146F3C8BA8CA /* Carbon.framework */; };
+		B46907A7302F3F593E7D130D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957F7268BCFABFC0E258709B /* QuartzCore.framework */; };
+		BE9EE0A42811344D9215FAFF /* today.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ACF33B3CD2CA58AFC0A2634 /* today.cpp */; };
+		F88AF5FFADA427F961618C6D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BBF96056AA4E7B57C08772 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		A106BF946C87A10489ACEC2A /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.glsl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h",
+			);
+			script = "${SDKS}/macosx/bin/stripcomments ${INPUT_FILE_PATH} -c -l g_${INPUT_FILE_BASE} ${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		04BBF96056AA4E7B57C08772 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		4ACF33B3CD2CA58AFC0A2634 /* today.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = today.cpp; path = source/today.cpp; sourceTree = SOURCE_ROOT; };
+		53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = burger.toolxcoosx.xcconfig; path = xcode/burger.toolxcoosx.xcconfig; sourceTree = SDKS; };
+		60566A081602146F3C8BA8CA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		6061B328817055E8B2E193D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		957F7268BCFABFC0E258709B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		CB663B78C243F425CB5F622D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		DFFEE98F53FFCF0CBC973E9C /* today */ = {isa = PBXFileReference; explicitFileType = compiled.mach-o.executable; includeInIndex = 0; path = today; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCC7A670010574428B34F0A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32139A1D805F71E1FF773B68 /* AppKit.framework in Frameworks */,
+				A12134D815CEF406E415857B /* Carbon.framework in Frameworks */,
+				F88AF5FFADA427F961618C6D /* Cocoa.framework in Frameworks */,
+				458701610073C7A6CB29DD2F /* IOKit.framework in Frameworks */,
+				319DAC5D53C5EBDE68655780 /* OpenGL.framework in Frameworks */,
+				B46907A7302F3F593E7D130D /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CE489F4A9041625DE5927C3 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				4ACF33B3CD2CA58AFC0A2634 /* today.cpp */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
+		6555983C4FFDAFC88D6ED936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6061B328817055E8B2E193D6 /* AppKit.framework */,
+				60566A081602146F3C8BA8CA /* Carbon.framework */,
+				04BBF96056AA4E7B57C08772 /* Cocoa.framework */,
+				CB663B78C243F425CB5F622D /* IOKit.framework */,
+				9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */,
+				957F7268BCFABFC0E258709B /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9796CE949CD3951E99BB35F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFFEE98F53FFCF0CBC973E9C /* today */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF721F5E8B7097EA27BA799E /* today */ = {
+			isa = PBXGroup;
+			children = (
+				6555983C4FFDAFC88D6ED936 /* Frameworks */,
+				9796CE949CD3951E99BB35F6 /* Products */,
+				4CE489F4A9041625DE5927C3 /* source */,
+				53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */,
+			);
+			name = today;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DAD2D09778D74452DF2AE7B3 /* today */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BC7ADA10E5C55B8C9B69DC3 /* Build configuration list for PBXNativeTarget "today" */;
+			buildPhases = (
+				FE0769639411746A766121C9 /* Sources */,
+				DCC7A670010574428B34F0A4 /* Frameworks */,
+				B491C6B43A4AFEBA72EDE202 /* ShellScript */,
+			);
+			buildRules = (
+				A106BF946C87A10489ACEC2A /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = today;
+			productName = today;
+			productReference = DFFEE98F53FFCF0CBC973E9C /* today */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12A09A1ACC3B8ECEA8576927 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = F581B7AB03EC06C5988D3B12 /* Build configuration list for PBXProject "todayxc5osx" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CF721F5E8B7097EA27BA799E /* today */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DAD2D09778D74452DF2AE7B3 /* today */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B491C6B43A4AFEBA72EDE202 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${SRCROOT}/bin ]; then mkdir ${SRCROOT}/bin; fi\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE0769639411746A766121C9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE9EE0A42811344D9215FAFF /* today.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0C00C8CCA9153043534489EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		3775C926D8EE347BA73B53FD /* Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		520283674314FCBD2B5DE222 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		A4A9EE6DA88007DCABB8C3A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		CC98BE2118225EC98B895AAD /* Internal */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		DB1B21D7258DC0305D74C757 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2BC7ADA10E5C55B8C9B69DC3 /* Build configuration list for PBXNativeTarget "today" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB1B21D7258DC0305D74C757 /* Debug */,
+				3775C926D8EE347BA73B53FD /* Internal */,
+				520283674314FCBD2B5DE222 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F581B7AB03EC06C5988D3B12 /* Build configuration list for PBXProject "todayxc5osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4A9EE6DA88007DCABB8C3A7 /* Debug */,
+				CC98BE2118225EC98B895AAD /* Internal */,
+				0C00C8CCA9153043534489EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12A09A1ACC3B8ECEA8576927 /* Project object */;
+}

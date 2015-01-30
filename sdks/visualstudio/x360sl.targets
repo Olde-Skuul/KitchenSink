@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Targets file for compiling Xbox 360 HLSL files -->
+<!-- Copyright Rebecca Ann Heineman -->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- Include the xml file that describes the menus in Visual Studio -->
+	<ItemGroup>
+		<PropertyPageSchema Include="$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml" />
+		<AvailableItemName Include="X360SL">
+			<Targets>_X360SL</Targets>
+		</AvailableItemName>
+	</ItemGroup>
+
+	<!-- Send the output to the linkers -->
+	<!-- Note: Disabled because this tool outputs headers -->
+	<!-- instead of .obj files -->
+	<!-- PropertyGroup>
+		<ComputeLinkInputsTargets>$(ComputeLinkInputsTargets);ComputeX360SLOutput;</ComputeLinkInputsTargets>
+		<ComputeLibInputsTargets>$(ComputeLibInputsTargets);ComputeX360SLOutput;</ComputeLibInputsTargets>
+	</PropertyGroup -->
+
+	<!-- Use the built-in XamlTaskFactory to perform the build processing -->
+	<!-- Use the xml file to get the command line description -->
+	<UsingTask TaskName="X360SL" TaskFactory="XamlTaskFactory"
+		AssemblyName="Microsoft.Build.Tasks.v4.0">
+		<Task>$(MSBuildThisFileDirectory)$(MSBuildThisFileName).xml</Task>
+	</UsingTask>
+
+	<!-- Describe building a X360SL target -->
+	<!-- BeforeTargets = When to build (Found in x360sl.props) -->
+	<!-- Condition = Build if a file is found -->
+	<!-- Outputs = What file does this output? -->
+	<!-- Inputs = Files that if modified, build -->
+	<!-- DependsOnTargets = Get the list of files Visual Studio determined to build -->	
+
+	<Target Name="_X360SL"
+		BeforeTargets="$(X360SLBeforeTargets)"
+		AfterTargets="$(X360SLAfterTargets)"
+		Condition="'@(X360SL)' != ''"
+		Outputs="%(X360SL.ObjectFileName);%(X360SL.HeaderFileName)"
+		Inputs="%(X360SL.Identity);%(X360SL.AdditionalDependencies);$(MSBuildProjectFile)"
+		DependsOnTargets="_SelectedFiles">
+		
+		<!-- Remove files that weren't selected -->
+		<ItemGroup Condition="'@(SelectedFiles)' != ''">
+			<X360SL Remove="@(X360SL)" Condition="'%(Identity)' != '@(SelectedFiles)'" />
+		</ItemGroup>
+
+		<!-- Collect the dependency information -->
+		<ItemGroup>
+			<X360SL_tlog Include="%(X360SL.ObjectFileName)" Condition="'%(X360SL.ObjectFileName)' != '' and '%(X360SL.ExcludedFromBuild)' != 'true'">
+				<Source>@(X360SL, '|')</Source>
+			</X360SL_tlog>
+		</ItemGroup>
+		
+		<!-- Message to print when the file is compiled -->
+		<Message Importance="High" Text="%(X360SL.ExecutionDescription)" />
+
+		<!-- Write out the dependency information to $(ProjectName).write.1.tlog -->
+		<!-- Use ^ to denote source files and full paths for output files for clean -->
+		<WriteLinesToFile
+			Condition="'@(X360SL_tlog)' != '' and '%(X360SL_tlog.ExcludedFromBuild)' != 'true'"
+			File="$(IntDir)$(ProjectName).write.1.tlog"
+			Encoding="utf-8"
+			Lines="^%(X360SL_tlog.Source);@(X360SL_tlog-&gt;'%(Fullpath)')"/>
+
+		<!-- Extract the variables declared in the XML file to prep for a build -->
+		<X360SL Condition="'@(X360SL)' != '' and '%(X360SL.ExcludedFromBuild)' != 'true'"
+			TargetProfile="%(X360SL.TargetProfile)"
+			EntryPointName="%(X360SL.EntryPointName)"
+			AdditionalIncludeDirectories="%(X360SL.AdditionalIncludeDirectories)"
+			ShowIncludeProcess="%(X360SL.ShowIncludeProcess)"
+			Optimization="%(X360SL.Optimization)"
+			DisablePreshaders="%(X360SL.DisablePreshaders)"
+			DisableValidation="%(X360SL.DisableValidation)"
+			DisableValidationZColor="%(X360SL.DisableValidationZColor)"
+			MatricesPacking="%(X360SL.MatricesPacking)"
+			ForcePartialPrecision="%(X360SL.ForcePartialPrecision)"
+			FlowControl="%(X360SL.FlowControl)"
+			EnableStrictMode="%(X360SL.EnableStrictMode)"
+			EnableBackwardsCompatibility="%(X360SL.EnableBackwardsCompatibility)"
+			ObjectFileName="%(X360SL.ObjectFileName)"
+			AssemblerOutput="%(X360SL.AssemblerOutput)"
+			AssemblyListingFileName="%(X360SL.AssemblyListingFileName)"
+			HeaderFileName="%(X360SL.HeaderFileName)"
+			VariableName="%(X360SL.VariableName)"
+			ColorCodeAssembly="%(X360SL.ColorCodeAssembly)"
+			GeneratePreprocessedSourceListing="%(X360SL.GeneratePreprocessedSourceListing)"
+			PreprocessedSourceListingName="%(X360SL.PreprocessedSourceListingName)"
+			FormatRaw="%(X360SL.FormatRaw)"
+			HideMicrocodeAddresses="%(X360SL.HideMicrocodeAddresses)"
+			HideMicrocodeDetails="%(X360SL.HideMicrocodeDetails)"
+			ShowMicrocodeDefaults="%(X360SL.ShowMicrocodeDefaults)"
+			ShowMicrocodePatched="%(X360SL.ShowMicrocodePatched)"
+			ShowMicrocodeRuntime="%(X360SL.ShowMicrocodeRuntime)"
+			HideShaderTiming="%(X360SL.HideShaderTiming)"
+			ShowMicrocodeRTF="%(X360SL.ShowMicrocodeRTF)"
+			GenerateDebugInformation="%(X360SL.GenerateDebugInformation)"
+			ProgramDatabaseFile="%(X360SL.ProgramDatabaseFile)"
+			EnableMicrocodeVerification="%(X360SL.EnableMicrocodeVerification)"
+			DisableBackend="%(X360SL.DisableBackend)"
+			ZeroInit="%(X360SL.ZeroInit)"
+			DisableAutomaticZPrepass="%(X360SL.DisableAutomaticZPrepass)"
+			RemoveUnusedInputs="%(X360SL.RemoveUnusedInputs)"
+			AddVFetche="%(X360SL.AddVFetche)"
+			EnableAssert="%(X360SL.EnableAssert)"
+			IsolateAssert="%(X360SL.IsolateAssert)"
+			MaxTempReg="%(X360SL.MaxTempReg)"
+			SetRange="%(X360SL.SetRange)"
+			DefineFXLFromVariable="%(X360SL.DefineFXLFromVariable)"
+			AutoStoreFXLVariable="%(X360SL.AutoStoreFXLVariable)"
+			AutoStoreFXLSemantic="%(X360SL.AutoStoreFXLSemantic)"
+			PreprocessorDefinitions="%(X360SL.PreprocessorDefinitions)"
+			NoLogo="%(X360SL.NoLogo)"
+
+			AdditionalOptions="%(X360SL.AdditionalOptions)"
+			CommandLineTemplate="%(X360SL.CommandLineTemplate)"
+			Inputs="%(X360SL.Identity)" />
+	</Target>
+
+	<!-- Create a list of .obj files to send to the linkers -->
+	<!-- Removed due to no .obj files output 
+	<Target Name="ComputeX360SLOutput" Condition="'@(X360SL)' != ''">
+		<ItemGroup>
+			<Link Include="@(X360SL->Metadata('ObjectFileName')->Distinct()->ClearMetadata())" Condition="'%(X360SL.ExcludedFromBuild)' != 'true'"/>
+			<Lib Include="@(X360SL->Metadata('ObjectFileName')->Distinct()->ClearMetadata())" Condition="'%(X360SL.ExcludedFromBuild)' != 'true'"/>
+		</ItemGroup>
+	</Target>
+	-->	
+
+</Project>

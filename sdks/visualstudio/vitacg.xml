@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<!-- Declare the name of this tool in Visual Studio's Properties dialog box -->
+	<Rule Name="VitaCGCompile" PageTemplate="tool" DisplayName="Vita CG Compiler Tool" Order="200">
+
+		<!-- Store the data in the project file -->
+		<Rule.DataSource>
+			<DataSource Persistence="ProjectFile" ItemType="VitaCGCompile" />
+		</Rule.DataSource>
+
+		<!-- List of categories in the dialog box -->
+		<Rule.Categories>
+			<Category Name="General" DisplayName="General" />
+			<Category Name="Optimization" DisplayName="Optimization" />
+			<Category Name="Preprocessor" DisplayName="Preprocessor" />
+			<Category Name="Output Files" DisplayName="Output Files" />
+			<Category Name="Advanced" DisplayName="Advanced" />
+			<Category Name="Command Line" DisplayName="Command Line" Subtype="CommandLine" />
+		</Rule.Categories>
+
+		<!-- Options for the General sub menu -->
+		<StringListProperty Category="General" Name="AdditionalIncludeDirectories"
+			DisplayName="Additional Include Directories"
+			Description="Specifies one or more directories to add to the include path; seperate with semi-colons if more than one. (-I [path])"
+			Switch="-I&quot;[value]&quot;" />
+
+		<EnumProperty Category="General" Name="WarningLevel"
+			DisplayName="Warning Level"
+			Description="Select how strict you want the compiler to be about code errors. (-W0 / -W4)">
+			<EnumValue Name="0" DisplayName="Turn Off All Warnings" Switch="-W0" />
+			<EnumValue Name="1" DisplayName="Level 1" Switch="-W1" />
+			<EnumValue Name="2"	DisplayName="Level 2" Switch="-W2" />
+			<EnumValue Name="3" DisplayName="Level 3" Switch="-W3" />
+			<EnumValue Name="4" DisplayName="Level 4" Switch="-W4" />
+		</EnumProperty>
+
+		<BoolProperty Category="General" Name="WarningsAreErrors"
+			DisplayName="Treat Warnings As Errors"
+			Description="Treats all compiler warnings as errors. (-Werror)"
+			Switch="-Werror" />
+
+		<BoolProperty Category="General" Name="PerfWarnings"
+			DisplayName="Warnings About Performance Hazards"
+			Description="Enables warnings about potential performance hazards. (-Wperf)"
+			Switch="-Wperf" />
+
+		<BoolProperty Category="General" Name="DisableColorWarnings"
+			DisplayName="Disabled Colored Warnings"
+			Description="Disables colored warnings/errors. (-nocolor)"
+			Switch="-nocolor" />
+
+		<EnumProperty Category="General" Name="Language"
+			DisplayName="Language"
+			Description="Selects the shader model to compile for. (-lang [language])">
+			<EnumValue Name="en" DisplayName="English" Switch="-lang en" />
+			<EnumValue Name="jp" DisplayName="日本語" Switch="-lang jp" />
+		</EnumProperty>
+
+		<BoolProperty Category="General" Name="DisableStdlib"
+			DisplayName="Disable stdlib"
+			Description="Disables the standard library. (-nostdlib)"
+			Switch="-nostdlib" />
+
+		<DynamicEnumProperty Category="General" Name="VitaCGCompileBeforeTargets" EnumProvider="Targets" IncludeInCommandLine="False"
+			DisplayName="Execute Before"
+			Description="Specifies the targets for the build customization to run before.">
+			<DynamicEnumProperty.ProviderSettings>
+				<NameValuePair Name="Exclude" Value="^VitaCGCompileBeforeTargets|^Compute" />
+			</DynamicEnumProperty.ProviderSettings>
+			<DynamicEnumProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="" HasConfigurationCondition="true" />
+			</DynamicEnumProperty.DataSource>
+		</DynamicEnumProperty>
+		<DynamicEnumProperty Category="General" Name="VitaCGCompileAfterTargets" EnumProvider="Targets" IncludeInCommandLine="False"
+			DisplayName="Execute After"
+			Description="Specifies the targets for the build customization to run after.">
+			<DynamicEnumProperty.ProviderSettings>
+				<NameValuePair Name="Exclude" Value="^VitaCGCompileAfterTargets|^Compute" />
+			</DynamicEnumProperty.ProviderSettings>
+			<DynamicEnumProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="" HasConfigurationCondition="true" />
+			</DynamicEnumProperty.DataSource>
+		</DynamicEnumProperty>
+
+		<!-- Options for the Optimization sub menu -->
+		<EnumProperty Category="Optimization" Name="Optimization"
+			DisplayName="Optimization Level"
+			Description="Sets the Optimization level, where level = 0, 1, 2, 3 or 4. (-O0, -O1, -O2, -O3, -O4)">
+			<EnumValue Name="0" DisplayName="Disabled" Switch="-O0" />
+			<EnumValue Name="1" DisplayName="Level 1" Switch="-O1" />
+			<EnumValue Name="2" DisplayName="Level 2" Switch="-O2" />
+			<EnumValue Name="3" DisplayName="Level 3" Switch="-O3" />
+			<EnumValue Name="4" DisplayName="Level 4" Switch="-O4" />
+		</EnumProperty>
+		
+		<BoolProperty Category="Optimization" Name="NoFastMath"
+			DisplayName="Disable algebraic transforms"
+			Description="Disables algebraic transforms. (-nofastmath)"
+			Switch="-nofastmath" />
+
+		<EnumProperty Category="Optimization" Name="Precision"
+			DisplayName="Precision"
+			Description="Selects the precision to use in compilation. (-fastprecision, -bestprecision)">
+			<EnumValue Name="Default" DisplayName="Default" Switch="" />
+			<EnumValue Name="Fast" DisplayName="Fast" Switch="-fastprecision" />
+			<EnumValue Name="Best" DisplayName="Best" Switch="-bestprecision" />
+		</EnumProperty>
+
+		<BoolProperty Category="Optimization" Name="NoFastInteger"
+			DisplayName="Precise Float to Integer Conversions"
+			Description="Forces all float to int conversions to full precision. (-nofastint)"
+			Switch="-nofastint" />
+
+		<BoolProperty Category="Optimization" Name="PositionInvariant"
+			DisplayName="Position Invariance"
+			Description="Generate a position invariant vertex program. (-invpos)"
+			Switch="-invpos" />
+
+		<!-- Options for the Preprocessor sub menu -->
+		<StringListProperty Category="Preprocessor" Name="PreprocessorDefinitions"
+			DisplayName="Preprocessor Definitions"
+			Description="Defines preprocessing symbols for your source file. (-D[symbol])"
+			Switch="-D[value]" />
+
+		<StringProperty Category="Preprocessor" Name="ForcedIncludeFiles"
+			DisplayName="Forced Include File"
+			Description="Includes [file] before the primary source file. (-include [file])"
+			Switch="-include &quot;[value]&quot;" />
+
+		<BoolProperty Category="Preprocessor" Name="PerformPreprocessing"
+			DisplayName="Preprocess Only"
+			Description="Performs pre-processing only. (-E)"
+			Switch="-E" />
+
+		<BoolProperty Category="Preprocessor" Name="DisableLineDirectives"
+			DisplayName="Disable Line Directives"
+			Description="When used with -E, disables #line directives. (-P)"
+			Switch="-P" />
+
+		<BoolProperty Category="Preprocessor" Name="PreserveComments"
+			DisplayName="Preserve Comments"
+			Description="When used with -E, preserves comments. (-C)"
+			Switch="-C" />
+
+		<!-- Options for the Output Files sub menu -->
+		<StringProperty Category="Output Files" Name="VariableName"
+			DisplayName="Variable name"
+			Description="When generating a header or object file, specify the variable name. (-label [name])"
+			Switch="-label " />
+
+		<StringProperty Category="Output Files" Name="ObjectFileName"
+			DisplayName="Object File Name"
+			Description="Specifies the name of the output object file. (-object [file])"
+			Switch="-object &quot;[value]&quot;" />
+
+		<StringProperty Category="Output Files" Name="HeaderFileName"
+			DisplayName="Header File Name"
+			Description="Specifies the name of the output header file. (-header [file])"
+			Switch="-header &quot;[value]&quot;" />
+		
+		<EnumProperty Category="Output Files" Name="DependencyFile"
+			DisplayName="Write Dependency File"
+			Description="Outputs a dependency file alongside the shader binary. (-MD)">
+			<EnumValue Name="false" Switch="" DisplayName="No" Description="No file." />
+			<EnumValue Name="true" Switch="-MD -MF " DisplayName="Yes" Description="Write Dependency File">
+				<Argument Property="DependencyFileName" IsRequired="true" />
+			</EnumValue>
+		</EnumProperty>
+					
+		<StringProperty Category="Output Files" Name="DependencyFileName"
+			DisplayName="Dependency Filename"
+			Description="Specifies the name of the output dependency file. (-MF [name])" />
+
+		<BoolProperty Category="Output Files" Name="PhonyTargets"
+			DisplayName="Phony Targets"
+			Description="Emits phony targets in dependency files. (-MP)"
+			Switch="-MP" />
+
+		<StringProperty Category="Output Files" Name="DependencyTarget"
+			DisplayName="Dependency Target Name"
+			Description="Sets the target name of the dependency rule. (-MT [name])"
+			Switch="-MT &quot;[value]&quot;" />
+
+		<BoolProperty Category="Output Files" Name="IgnoreMissing"
+			DisplayName="Ignore Missing Dependency Files"
+			Description="Ignores missing files during dependency generation. (-MG)"
+			Switch="-MG" />
+			
+		<EnumProperty Category="Output Files" Name="CgCache"
+			DisplayName="Enable CgCache"
+			Description="Outputs a Cg cache file for shader association (-cache, -xmlcache, -sdb, -xmlsdb)">
+			<EnumValue Name="None" DisplayName="No cache" Switch="" />
+			<EnumValue Name="Binary" DisplayName="Binary" Switch="-cache -cachedir ">
+				<Argument Property="CacheDir" IsRequired="true" />
+			</EnumValue>
+			<EnumValue Name="XML" DisplayName="XML" Switch="-xmlcache -cachedir ">
+				<Argument Property="CacheDir" IsRequired="true" />
+			</EnumValue>
+			<EnumValue Name="SDBBinary" DisplayName="XML" Switch="-sdb ">
+				<Argument Property="SDBFilename" IsRequired="true" />
+			</EnumValue>
+			<EnumValue Name="SDBXML" DisplayName="XML" Switch="-xmlsdb ">
+				<Argument Property="SDBFilenameXML" IsRequired="true" />
+			</EnumValue>
+		</EnumProperty>
+
+		<StringProperty Category="Output Files" Name="CacheDir"
+			DisplayName="Cache Directory"
+			Description="When generating a header file, specify the variable name. (-cachedir [name])" />
+
+		<StringProperty Category="Output Files" Name="SDBFilename"
+			DisplayName="SDB Binary Filename"
+			Description="When generating a header file, specify the variable name. (-sdb [name])" />
+
+		<StringProperty Category="Output Files" Name="SDBFilenameXML"
+			DisplayName="SDB XML Filename"
+			Description="When generating a header file, specify the variable name. (-xmlsdb [name])" />
+
+		<!-- Options for the Advanced sub menu -->
+		<EnumProperty Category="Advanced" Name="TargetProfile"
+			DisplayName="Shader Profile"
+			Description="Selects the shader model to compile for. (-profile [profile])">
+			<EnumValue Name="sce_vp_psp2" DisplayName="Vertex Shader Vita" Switch="-profile sce_vp_psp2" />
+			<EnumValue Name="sce_fp_psp2" DisplayName="Fragment Shader Vita" Switch="-profile sce_fp_psp2" />
+		</EnumProperty>
+
+		<StringProperty Category="Advanced" Name="EntryPointName"
+			DisplayName="Shader Entry Point"
+			Description="Specifies the entry point of the shader. (-entry [name])"
+			Switch="-entry &quot;[value]&quot;" />
+
+		<StringListProperty Category="Advanced" Name="DisableSpecificWarnings"
+			DisplayName="Disable Specific Warnings"
+			Description="Disable the desired warning numbers; put numbers in a semi-colon delimited list. (-Wsuppress=id[,[id...])"
+			Switch="-Wsuppress=" />
+
+		<EnumProperty Category="Advanced" Name="Pendantic"
+			DisplayName="Enable Pendantic Messages"
+			Description="Warns about extensions being used. (-pedantic, -pedantic-error)">
+			<EnumValue Name="Default" DisplayName="No messages" Switch="" />
+			<EnumValue Name="Warnings" DisplayName="Warnings only" Switch="-pedantic" />
+			<EnumValue Name="Errors" DisplayName="Errors and Warnings" Switch="-pedantic-error" />
+		</EnumProperty>
+
+		<EnumProperty Category="Advanced" Name="CgFX"
+			DisplayName="CgFX Support"
+			Description="Enables or Disables CgFX support. (-fx, -nofx)">
+			<EnumValue Name="Default" DisplayName="Default" Switch="" />
+			<EnumValue Name="Warnings" DisplayName="Enabled" Switch="-fx" />
+			<EnumValue Name="Errors" DisplayName="Disabled" Switch="-nofx" />
+		</EnumProperty>
+
+		<!-- Options for the sample command line -->
+		<StringProperty Category="Command Line" Name="Inputs" IsRequired="true">
+			<StringProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="VitaCGCompile" SourceType="Item" />
+			</StringProperty.DataSource>
+		</StringProperty>
+			
+		<StringProperty Category="Command Line" Name="AdditionalOptions" Subtype="AdditionalOptions"
+			DisplayName="Additional Options"
+			Description="Additional Options" />
+			
+		<!-- Hidden data -->
+		<StringProperty Name="CommandLineTemplate" DisplayName="Command Line" Visible="False" IncludeInCommandLine="False" />
+		<StringListProperty Name="AdditionalDependencies" DisplayName="Additional Dependencies" IncludeInCommandLine="False" Visible="False" />
+		<StringProperty Name="ExecutionDescription" DisplayName="Execution Description" IncludeInCommandLine="False" Visible="False" />
+	
+	</Rule>
+
+	<!-- Name of the tool for the list of tools -->
+	<ItemType Name="VitaCGCompile" DisplayName="Vita CG Compiler Tool" />
+
+	<!-- File extensions this compiler will work with -->
+	<FileExtension Name="*.vitacg" ContentType="VitaCGCompile" />
+
+	<!-- Type of content -->
+	<ContentType Name="VitaCGCompile" DisplayName="Vita CG Compiler Tool" ItemType="VitaCGCompile" />
+</ProjectSchemaDefinitions>

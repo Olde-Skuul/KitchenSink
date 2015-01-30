@@ -1,0 +1,150 @@
+#
+# This makefile init will help in the creation of applications
+# using the watcom compiler using WMAKE for Win32, DOS4GW and DOSX32 targets
+#
+
+# Copyright 1995-2014 by Rebecca Ann Heineman becky@burgerbecky.com
+
+# It is released under an MIT Open Source license. Please see LICENSE
+# for license details. Yes, you can use it in a
+# commercial title without paying anything, just give me a credit.
+# Please? It's not like I'm asking you for money!
+
+#
+# sourcedir has a ';' delimited list of directories where the source code can be found.
+#
+
+#
+# Default project name
+#
+
+!ifndef projectname
+projectname = project
+!endif
+
+#
+# temp directory name
+#
+
+!ifndef basetempdir
+basetempdir = temp\$(projectname)
+!endif
+
+#
+# Final binary location
+#
+
+!ifndef destdir
+destdir = bin
+!endif
+
+#
+# Ensure sdks is pulled from the environment
+#
+
+!ifndef sdks
+sdks = $(%sdks)
+!endif
+
+#
+# Set the set of known files supported
+# Note: They are in the reverse order of building. .c is built first, then .x86
+# until the .exe or .lib files are built
+#
+
+.extensions:
+.extensions: .exe .exp .lib .obj .h .cpp .x86 .c
+
+#
+# Tell WMAKE where to find the files to work with
+#
+
+.c: $(sourcedir)
+.cpp: $(sourcedir)
+.x86: $(sourcedir)
+
+
+# This speeds up the building process for Watcom because it
+# keeps the apps in memory and doesn't have to reload for every source file
+# Note: There is a bug that if the wlib app is loaded, it will not
+# get the proper WOW file if a full build is performed
+
+# The bug is gone from Watcom 1.2
+
+!ifdef __LOADDLL__
+!loaddll wcc386 $(%watcom)/binnt/wccd386
+!loaddll wpp386 $(%watcom)/binnt/wppd386
+!loaddll wlink $(%watcom)/binnt/wlinkd
+!loaddll wlib $(%watcom)/binnt/wlibd
+!endif
+
+#
+# Set the compiler flags for each of the build types
+#
+
+CFlagsDebug=-d_DEBUG -d2 -od
+CFlagsInternal=-d_DEBUG -d2 -oaxsh
+CFlagsRelease=-dNDEBUG -d0 -oaxsh
+
+#
+# Set the flags for each target operating system
+#
+
+CFlagsx32=-bt=DOS -d__X32__=1 -i="$(%SDKs)\dos\burgerlib;$(%SDKs)\dos\x32;$(%watcom)\h"
+CFlagsdos4gw=-bt=DOS -d__DOS4G__=1 -i="$(%SDKs)\dos\burgerlib;$(%SDKs)\dos\sosaudio;$(%watcom)\h;$(%watcom)\h\nt"
+CFlagsw32=-bt=NT -dGLUT_DISABLE_ATEXIT_HACK -dGLUT_NO_LIB_PRAGMA -dTARGET_CPU_X86=1 -dTARGET_OS_WIN32=1 -dTYPE_BOOL=1 -dUNICODE -d_UNICODE -dWIN32_LEAN_AND_MEAN -i="$(%SDKs)\windows\burgerlib;$(%SDKs)\windows\opengl;$(%SDKs)\windows\directx9;$(%SDKs)\windows\windows5;$(%SDKs)\windows\quicktime7;$(%watcom)\h;$(%watcom)\h\nt"
+
+#
+# Set the WASM flags for each of the build types
+#
+
+AFlagsDebug=-d_DEBUG
+AFlagsInternal=-d_DEBUG
+AFlagsRelease=-dNDEBUG
+
+#
+# Set the WASM flags for each operating system
+#
+
+AFlagsx32=-d__X32__=1
+AFlagsdos4gw=-d__DOS4G__=1
+AFlagsw32=-d__WIN32__=1
+
+LFlagsDebug=
+LFlagsInternal=
+LFlagsRelease=
+
+LFlagsx32=system x32r libp $(%SDKs)\dos\burgerlib;$(%SDKs)\dos\x32
+LFlagsdos4gw=system dos4g libp $(%SDKs)\dos\burgerlib;$(%SDKs)\dos\sosaudio
+LFlagsw32=system nt libp $(%SDKs)\windows\burgerlib;$(%SDKS)\windows\directx9 LIBRARY VERSION.lib,opengl32.lib,winmm.lib,shell32.lib,shfolder.lib
+
+# Now, set the compiler flags
+
+CL=WCC386 -6r -fp6 -w4 -ei -j -mf -zq -zp=8 -wcd=7 -i=$(includedir)
+CP=WPP386 -6r -fp6 -w4 -ei -j -mf -zq -zp=8 -wcd=7 -i=$(includedir)
+ASM=$(%WATCOM)\binnt\WASM -5r -fp6 -w4 -zq -d__WATCOM__=1
+Link=*WLINK option caseexact option quiet PATH $(%Watcom)\binnt;$(%Watcom)\binw;.
+
+# Set the default build rules
+# Requires ASM, CP to be set
+
+# Macro expansion is on page 93 of the C/C++ Tools User's Guide
+# $^* = C:\dir\target (No extension)
+# $[* = C:\dir\dep (No extension)
+# $^@ = C:\dir\target.ext
+# $^: = C:\dir\
+
+.x86.obj : .AUTODEPEND
+	@if not exist $^: @!mkdir $^:
+	@echo $[&.x86 / $(%config) / $(%target)
+	@$(ASM) $(AFlags$(%config)) $(AFlags$(%target)) $[*.x86 -fo=$^@ -fr=$^*.err
+
+.c.obj : .AUTODEPEND
+	@if not exist $^: @!mkdir $^:
+	@echo $[&.c / $(%config) / $(%target)
+	@$(CP) $(CFlags$(%config)) $(CFlags$(%target)) $[*.c -fo=$^@ -fr=$^*.err
+
+.cpp.obj : .AUTODEPEND
+	@if not exist $^: @!mkdir $^:
+	@echo $[&.cpp / $(%config) / $(%target)
+	@$(CP) $(CFlags$(%config)) $(CFlags$(%target)) $[*.cpp -fo=$^@ -fr=$^*.err

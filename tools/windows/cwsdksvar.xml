@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?codewarrior exportversion="1.0" ideversion="5.5" ?>
+<!--
+	Import this file into CodeWarrior's IDE Preferences:General:Source Trees
+	prefence pane to set SDKS to the SDKS environment variable
+
+	Copyright 1995-2014 by Rebecca Ann Heineman becky@burgerbecky.com
+
+	It is released under an MIT Open Source license. Please see LICENSE
+	for license details. Yes, you can use it in a
+	commercial title without paying anything, just give me a credit.
+	Please? It's not like I'm asking you for money!
+
+-->
+
+<EXPORTEDPANEL>
+	<NAME>Source Trees</NAME>
+	<SETTINGLIST>
+		<SETTING><NAME>UserSourceTrees</NAME>
+			<SETTING>
+				<SETTING><NAME>Name</NAME><VALUE>SDKS</VALUE></SETTING>
+				<SETTING><NAME>Kind</NAME><VALUE>EnvironmentVariable</VALUE></SETTING>
+				<SETTING><NAME>VariableName</NAME><VALUE>SDKS</VALUE></SETTING>
+			</SETTING>
+		</SETTING>
+	</SETTINGLIST>
+</EXPORTEDPANEL>

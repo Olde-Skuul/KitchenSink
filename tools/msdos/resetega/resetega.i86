@@ -1,0 +1,48 @@
+;
+; Run resetega to force the display to 80x25
+; standard EGA font to restore video
+;
+
+; Copyright 1995-2014 by Rebecca Ann Heineman becky@burgerbecky.com
+
+; It is released under an MIT Open Source license. Please see LICENSE
+; for license details. Yes, you can use it in a
+; commercial title without paying anything, just give me a credit.
+; Please? It's not like I'm asking you for money!
+
+;
+; When running a graphical application under DOS,
+; sometimes the video display is left in an
+; unknown state.
+;
+
+
+	.8086
+	.MODEL TINY
+	.CODE
+
+	ORG 100h
+	
+;
+; Call int 10 with video mode 3 (80x25) Color
+;
+
+	mov ax,03H	
+	int 010H
+
+;
+; Call int 10 to load and activate rom 8x8 character set
+; bl = 0 for standard EGA font
+;
+
+	mov ax,01112H
+	mov bl,00H
+	int 010H
+	
+;
+; Return to MS/DOS
+;
+
+	mov	ax,04c00H
+	int 021H
+	end

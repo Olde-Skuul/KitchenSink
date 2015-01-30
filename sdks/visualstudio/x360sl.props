@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Props file for building Xbox 360 HLSL files -->
+<!-- Copyright Rebecca Ann Heineman -->
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!-- Build after CustomBuild, but before C# and C++ -->
+	<PropertyGroup
+		Condition="'$(X360SLBeforeTargets)' == '' and '$(X360SLAfterTargets)' == '' and '$(ConfigurationType)' != 'Makefile'">
+		<X360SLBeforeTargets>Midl</X360SLBeforeTargets>
+		<X360SLAfterTargets>CustomBuild</X360SLAfterTargets>
+	</PropertyGroup>
+	
+	<!-- Defaults and the command line to invoke -->
+	<ItemDefinitionGroup>
+		<X360SL>
+			<!-- /T<profile> target profile -->
+			<TargetProfile>ps_3_0</TargetProfile>
+
+			<!-- /E<name> entrypoint name -->
+			<!-- EntryPointName>main</EntryPointName -->
+
+			<!-- /I<include> additional include path -->
+			<!-- AdditionalIncludeDirectories></AdditionalIncludeDirectories -->
+
+			<!-- /Vi display details about the include process -->
+			<ShowIncludeProcess>false</ShowIncludeProcess>
+
+			<!-- /Od optimization level 0 or 1 -->
+			<Optimization>1</Optimization>
+
+			<!-- /Op disable preshaders -->
+			<DisablePreshaders>false</DisablePreshaders>
+
+			<!-- /Vd disable validation -->
+			<DisableValidation>false</DisableValidation>
+
+			<!-- /Vz disable validator comparison of Z- and Color-Pass outputs -->
+			<DisableValidationZColor>false</DisableValidationZColor>
+
+			<!-- Pack matrices in /Zpr row-major, /Zpc column-major order -->
+			<!-- MatricesPacking>Column</MatricesPacking -->
+
+			<!-- /Gpp force partial precision -->
+			<ForcePartialPrecision>false</ForcePartialPrecision>
+
+			<!-- /Gfa avoid or /Gfp prefer flow control constructs -->
+			<!-- FlowControl>Prefer</FlowControl -->
+
+			<!-- /Ges enable strict mode -->
+			<EnableStrictMode>false</EnableStrictMode>
+			
+			<!-- /Gec enable backwards compatibility mode -->
+			<EnableBackwardsCompatibility>false</EnableBackwardsCompatibility>
+
+			<!-- /Fo<file> output object file -->
+			<!-- ObjectFileName>$(IntDir)%(FileName).bin</ObjectFileName -->
+
+			<!-- /Fc<file> or /Fx<file> output assembly code listing file -->
+			<AssemblerOutput>NoListing</AssemblerOutput>
+			<AssemblyListingFileName>$(IntDir)%(FileName).asm</AssemblyListingFileName>
+
+			<!-- /Fh<file> output header file containing object code -->
+			<HeaderFileName>%(RootDir)%(Directory)%(FileName).h</HeaderFileName>
+
+			<!-- /Vn<name> use <name> as variable name in header file -->
+			<VariableName>g_%(FileName)</VariableName>
+
+			<!-- /Cc output color coded assembly listings -->
+			<ColorCodeAssembly>false</ColorCodeAssembly>
+
+			<!-- /P<file> preprocess to file (must be used alone) -->
+			<GeneratePreprocessedSourceListing>false</GeneratePreprocessedSourceListing>
+			<PreprocessedSourceListingName>$(IntDir)%(FileName).lst</PreprocessedSourceListingName>
+
+			<!-- /XuFormatRaw output raw microcode (just the physical part) -->
+			<FormatRaw>false</FormatRaw>
+
+			<!-- /Xudha hide microcode addresses -->
+			<HideMicrocodeAddresses>false</HideMicrocodeAddresses>
+
+			<!-- /Xudhd hide microcode details -->
+			<HideMicrocodeDetails>false</HideMicrocodeDetails>
+
+			<!-- /Xudsdv show microcode default values -->
+			<ShowMicrocodeDefaults>false</ShowMicrocodeDefaults>
+
+			<!-- /Xudsp show microcode patched values -->
+			<ShowMicrocodePatched>false</ShowMicrocodePatched>
+
+			<!-- /Xudsrd show microcode runtime data -->
+			<ShowMicrocodeRuntime>false</ShowMicrocodeRuntime>
+
+			<!-- /Xudhte hide shader timing estimate -->
+			<HideShaderTiming>false</HideShaderTiming>
+
+			<!-- /Xudsrtf show microcode in Rich Text Format (RTF) -->
+			<ShowMicrocodeRTF>false</ShowMicrocodeRTF>
+
+			<!-- /XZi[-] enable/disable generating a UPDB file containing debugging information -->
+			<GenerateDebugInformation>false</GenerateDebugInformation>
+
+			<!-- /XFd<file> name the UPDB debugging information file -->
+			<ProgramDatabaseFile>$(IntDir)%(FileName).updb</ProgramDatabaseFile>
+
+			<!-- /XVe[-] enable/disable microcode verification. -->
+			<EnableMicrocodeVerification>false</EnableMicrocodeVerification>
+
+			<!-- /Xbe:<n>- disable a specific version of the compiler back-end -->
+			<DisableBackend>0</DisableBackend>
+
+			<!-- /XZc:zeroInit initialize all local variables to zero -->
+			<ZeroInit>false</ZeroInit>
+
+			<!-- /XOautoz- don't optimize the shader for automatic z-prepass -->
+			<DisableAutomaticZPrepass>false</DisableAutomaticZPrepass>
+
+			<!-- /XQremoveunusedpsinputs remove unused pixel shader inputs. -->
+			<RemoveUnusedInputs>false</RemoveUnusedInputs>
+
+			<!-- /XOautovfe automatically add vfetche instructions for XPS -->
+			<AddVFetche>false</AddVFetche>
+
+			<!-- /Xassert enable 'assert' intrinsic -->
+			<EnableAssert>false</EnableAssert>
+
+			<!-- /Xassert:isolate enable 'assert' intrinsic with [isolate] semantics -->
+			<IsolateAssert>false</IsolateAssert>
+
+			<!-- /Xmaxtempreg:<n> set maximum number of temp registers available -->
+			<!-- MaxTempReg>0</MaxTempReg -->
+
+			<!-- /Xsampreg:<pixelstart>-<pixelend>,<vertexstart>-<vertexend> set ranges of sampler registers available -->
+			<!-- SetRange>0-1,3-4</SetRange -->
+
+			<!-- /XfxPv define FXL parameters from variable rather than semantic names -->
+			<DefineFXLFromVariable>false</DefineFXLFromVariable>
+
+			<!-- /XfxAv automatically store FXL parameter variable names -->
+			<AutoStoreFXLVariable>false</AutoStoreFXLVariable>
+
+			<!-- /XfxAs automatically store FXL parameter semantic names -->
+			<AutoStoreFXLSemantic>false</AutoStoreFXLSemantic>
+
+			<!-- /D<id>=<text> define macro -->
+			<!-- PreprocessorDefinitions></PreprocessorDefinitions -->
+
+			<!-- /nologo suppress copyright message -->
+			<NoLogo>true</NoLogo>
+
+			<!-- The tool that should be executed -->
+			<CommandLineTemplate>"$(XEDK)\bin\win32\fxc.exe" [Inputs] [AllOptions] [AdditionalOptions]</CommandLineTemplate>
+
+			<!-- Line to print in Visual Studio's output -->
+			<ExecutionDescription>fxc %(FileName)%(Extension)...</ExecutionDescription>
+		</X360SL>
+	</ItemDefinitionGroup>
+</Project>

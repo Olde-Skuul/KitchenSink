@@ -1,0 +1,5 @@
+#!/bin/bash
+SCRIPTDIR="$( cd "$( dirname "$0" )" && pwd )"
+PERFORCE="${SCRIPTDIR}"
+export PERFORCE
+python "$( dirname "$( dirname "${SCRIPTDIR}")")/python/build.py" $*

@@ -1,0 +1,75 @@
+#
+# Build addlf for windows
+#
+
+#
+# sourcedir = Set the work directories for the source
+#
+
+sourcedir = source
+
+#
+# Name of the output library
+#
+
+projectname = addlf
+
+#
+# includedir = Header includes
+#
+
+includedir = $(sourcedir)
+
+#
+# Object files to work with for the library
+#
+
+objs= &
+	$(A)\addlf.obj
+
+#
+# Create the build environment
+#
+
+!include $(%sdks)\watcom\burger.mif
+
+#
+# List the names of all of the final binaries to build
+#
+
+all : .SYMBOLIC
+	@set config=Debug
+	@set target=w32
+	@%make $(destdir)\$(projectname)watw32dbg.exe
+	@set config=Internal
+	@set target=w32
+	@%make $(destdir)\$(projectname)watw32int.exe
+	@set config=Release
+	@set target=w32
+	@%make $(destdir)\$(projectname)watw32rel.exe
+
+addlfwatwin.wmk :
+	@%null
+
+#
+# A = The object file temp folder
+#
+
+A = $(basetempdir)watw32dbg
+$(destdir)\$(projectname)watw32dbg.exe : $+$(OBJS)$- addlfwatwin.wmk
+	@if not exist $(destdir) @!mkdir $(destdir)
+	@SET WOW={$+$(OBJS)$-}
+	@$(LINK) $(LFlagsw32) $(LFlagsDebug) LIBRARY burgerlibwatw32dbg.lib NAME $^@ FILE @wow
+
+A = $(basetempdir)watw32int
+$(destdir)\$(projectname)watw32int.exe : $+$(OBJS)$- addlfwatwin.wmk
+	@if not exist $(destdir) @!mkdir $(destdir)
+	@SET WOW={$+$(OBJS)$-}
+	@$(LINK) $(LFlagsw32) $(LFlagsInternal) LIBRARY burgerlibwatw32int.lib NAME $^@ FILE @wow
+
+A = $(basetempdir)watw32rel
+$(destdir)\$(projectname)watw32rel.exe : $+$(OBJS)$- addlfwatwin.wmk
+	@if not exist $(destdir) @!mkdir $(destdir)
+	@SET WOW={$+$(OBJS)$-}
+	@$(LINK) $(LFlagsw32) $(LFlagsRelease) LIBRARY burgerlibwatw32rel.lib NAME $^@ FILE @wow
+

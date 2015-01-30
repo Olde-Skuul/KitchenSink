@@ -1,0 +1,27 @@
+//
+// Copyright 1995-2014 by Rebecca Ann Heineman becky@burgerbecky.com
+//
+// It is released under an MIT Open Source license. Please see LICENSE
+// for license details. Yes, you can use it in a
+// commercial title without paying anything, just give me a credit.
+// Please? It's not like I'm asking you for money!
+//
+
+// Include all the common settings
+
+#include "burger.commonxcoosx.xcconfig"
+
+// Game specific data
+
+OTHER_LDFLAGS = -lburgerlib$(IDESUFFIX)osx$(SUFFIX)
+// Final filename
+
+FINAL_OUTPUT = $(PRODUCT_NAME);
+
+// Location to store the executable files
+// CONFIGURATION_BUILD_DIR = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME);
+CONFIGURATION_BUILD_DIR = $(SYMROOT)/$(PRODUCT_NAME)$(IDESUFFIX)$(SUFFIX);
+
+// Location to store the build files
+// CONFIGURATION_TEMP_DIR = $(PROJECT_TEMP_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME);
+CONFIGURATION_TEMP_DIR = $(SYMROOT)/$(PRODUCT_NAME)$(IDESUFFIX)$(SUFFIX);

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="burgerlib" />
+		<Option makefile="makefile" />
+		<Option pch_mode="2" />
+		<Option compiler="ow" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/burgerlibcdbwatw32dbg.lib" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="temp/burgerlibcbpwatw32dbg/" />
+				<Option type="1" />
+				<Option compiler="ow" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-d2" />
+					<Add option="-wx" />
+					<Add option="-fp6" />
+					<Add option="-6r" />
+					<Add option="-fr=$(ERROR_FILE)" />
+					<Add option="-d_DEBUG" />
+				</Compiler>
+			</Target>
+			<Target title="Internal">
+				<Option output="bin/burgerlibcdbwatw32int.lib" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="temp/burgerlibcbpwatw32int/" />
+				<Option type="1" />
+				<Option compiler="ow" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-ot" />
+					<Add option="-wx" />
+					<Add option="-fr=$(ERROR_FILE)" />
+					<Add option="-fp6" />
+					<Add option="-6r" />
+					<Add option="-d_DEBUG" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/burgerlibcdbwatw32rel.lib" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="temp/burgerlibcbpwatw32rel/" />
+				<Option type="1" />
+				<Option compiler="ow" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-ox" />
+					<Add option="-ot" />
+					<Add option="-wx" />
+					<Add option="-fr=$(ERROR_FILE)" />
+					<Add option="-fp6" />
+					<Add option="-6r" />
+					<Add option="-dNDEBUG" />
+				</Compiler>
+			</Target>
+			<Environment>
+				<Variable name="ERROR_FILE" value="$(TARGET_OBJECT_DIR)foo.err" />
+			</Environment>
+		</Build>
+		<VirtualTargets>
+			<Add alias="Everything" targets="Debug;Internal;Release;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add option="-dGLUT_DISABLE_ATEXIT_HACK" />
+			<Add option="-dGLUT_NO_LIB_PRAGMA" />
+			<Add option="-dTARGET_CPU_X86=1" />
+			<Add option="-dTARGET_OS_WIN32=1" />
+			<Add option="-dTYPE_BOOL=1" />
+			<Add option="-dUNICODE" />
+			<Add option="-d_UNICODE" />
+			<Add option="-dWIN32_LEAN_AND_MEAN" />
+			<Add directory='&quot;source&quot;' />
+			<Add directory='&quot;$(SDKS)/windows/burgerlib&quot;' />
+			<Add directory='&quot;$(SDKS)/windows/perforce&quot;' />
+			<Add directory='&quot;$(SDKS)/windows/opengl&quot;' />
+			<Add directory='&quot;$(SDKS)/windows/directx9&quot;' />
+			<Add directory='&quot;$(SDKS)/windows/windows5&quot;' />
+		</Compiler>
+		<Unit filename="source/addlf.cpp" />
+		<Unit filename="source/addlf.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

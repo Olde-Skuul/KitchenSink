@@ -1,0 +1,244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34F6683AF6E56600CF89F38F /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */; };
+		94B901F3C86319493EF831E1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BBF96056AA4E7B57C08772 /* Cocoa.framework */; };
+		9AFB03F0E273AE0B38650E13 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061B328817055E8B2E193D6 /* AppKit.framework */; };
+		A010171E598948C0169DFB7D /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60566A081602146F3C8BA8CA /* Carbon.framework */; };
+		C23631335F8A3BF9D97224F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957F7268BCFABFC0E258709B /* QuartzCore.framework */; };
+		CBE0764A5F55D0D890AA1736 /* dump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 256B9986B05DD6A3E9DFFA17 /* dump.cpp */; };
+		CCAD75014B0666AE11E123D9 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB663B78C243F425CB5F622D /* IOKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		846D5B1852C39370C5AB4DF9 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.glsl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h",
+			);
+			script = "${SDKS}/macosx/bin/stripcomments ${INPUT_FILE_PATH} -c -l g_${INPUT_FILE_BASE} ${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		04BBF96056AA4E7B57C08772 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		256B9986B05DD6A3E9DFFA17 /* dump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = dump.cpp; path = source/dump.cpp; sourceTree = SOURCE_ROOT; };
+		53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = burger.toolxcoosx.xcconfig; path = xcode/burger.toolxcoosx.xcconfig; sourceTree = SDKS; };
+		60566A081602146F3C8BA8CA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		6061B328817055E8B2E193D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		957F7268BCFABFC0E258709B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		CB663B78C243F425CB5F622D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		E9BA83A0B7508DF5F1C7BEEF /* dump */ = {isa = PBXFileReference; explicitFileType = compiled.mach-o.executable; includeInIndex = 0; path = dump; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA03037470AFF3FEF127E187 /* dump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dump.h; path = source/dump.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DCFECF88D09DD20E7D6AE739 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AFB03F0E273AE0B38650E13 /* AppKit.framework in Frameworks */,
+				A010171E598948C0169DFB7D /* Carbon.framework in Frameworks */,
+				94B901F3C86319493EF831E1 /* Cocoa.framework in Frameworks */,
+				CCAD75014B0666AE11E123D9 /* IOKit.framework in Frameworks */,
+				34F6683AF6E56600CF89F38F /* OpenGL.framework in Frameworks */,
+				C23631335F8A3BF9D97224F9 /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0BC9E8F9DC08D73320A6DA9B /* dump */ = {
+			isa = PBXGroup;
+			children = (
+				6555983C4FFDAFC88D6ED936 /* Frameworks */,
+				9796CE949CD3951E99BB35F6 /* Products */,
+				4CE489F4A9041625DE5927C3 /* source */,
+				53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */,
+			);
+			name = dump;
+			sourceTree = "<group>";
+		};
+		4CE489F4A9041625DE5927C3 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				256B9986B05DD6A3E9DFFA17 /* dump.cpp */,
+				FA03037470AFF3FEF127E187 /* dump.h */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
+		6555983C4FFDAFC88D6ED936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6061B328817055E8B2E193D6 /* AppKit.framework */,
+				60566A081602146F3C8BA8CA /* Carbon.framework */,
+				04BBF96056AA4E7B57C08772 /* Cocoa.framework */,
+				CB663B78C243F425CB5F622D /* IOKit.framework */,
+				9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */,
+				957F7268BCFABFC0E258709B /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9796CE949CD3951E99BB35F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9BA83A0B7508DF5F1C7BEEF /* dump */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05B9CB23049DF693E8BC8554 /* dump */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBA64009F5834111DCA0C203 /* Build configuration list for PBXNativeTarget "dump" */;
+			buildPhases = (
+				ABC94E9E7130BCCABE7EE764 /* Sources */,
+				DCFECF88D09DD20E7D6AE739 /* Frameworks */,
+				B491C6B43A4AFEBA72EDE202 /* ShellScript */,
+			);
+			buildRules = (
+				846D5B1852C39370C5AB4DF9 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = dump;
+			productName = dump;
+			productReference = E9BA83A0B7508DF5F1C7BEEF /* dump */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B3D6B421731F8081443ECA5B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 0AA061DD353F7B28B86E896D /* Build configuration list for PBXProject "dumpxc3osx" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0BC9E8F9DC08D73320A6DA9B /* dump */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05B9CB23049DF693E8BC8554 /* dump */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B491C6B43A4AFEBA72EDE202 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${SRCROOT}/bin ]; then mkdir ${SRCROOT}/bin; fi\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABC94E9E7130BCCABE7EE764 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CBE0764A5F55D0D890AA1736 /* dump.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FB9F60BFEBCC589655D8E5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		4C65A847FDF86AF92AA937C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		6110DBB779B9563144EE94B9 /* Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		802845FB70751E81D924D377 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		CDE19B2BB0659B92BF0C9406 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		F5CACF6AD0748468A34B8706 /* Internal */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0AA061DD353F7B28B86E896D /* Build configuration list for PBXProject "dumpxc3osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				802845FB70751E81D924D377 /* Debug */,
+				F5CACF6AD0748468A34B8706 /* Internal */,
+				CDE19B2BB0659B92BF0C9406 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBA64009F5834111DCA0C203 /* Build configuration list for PBXNativeTarget "dump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FB9F60BFEBCC589655D8E5F /* Debug */,
+				6110DBB779B9563144EE94B9 /* Internal */,
+				4C65A847FDF86AF92AA937C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B3D6B421731F8081443ECA5B /* Project object */;
+}

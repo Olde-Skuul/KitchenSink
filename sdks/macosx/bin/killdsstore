@@ -1,0 +1,3 @@
+#!/bin/bash
+# This command will delete every single .DS_Store from the system
+sudo find / -name ".DS_Store" -depth -exec rm {} \;

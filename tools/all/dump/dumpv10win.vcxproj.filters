@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClInclude Include="source\dump.h">
+			<Filter>source</Filter>
+		</ClInclude>
+		<ClCompile Include="source\dump.cpp">
+			<Filter>source</Filter>
+		</ClCompile>
+		<Filter Include="source">
+			<UniqueIdentifier>{06C0BF96-CBAC-3250-996A-A6D4675C48F0}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+</Project>

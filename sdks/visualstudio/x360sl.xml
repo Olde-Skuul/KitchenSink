@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectSchemaDefinitions xmlns="http://schemas.microsoft.com/build/2009/properties" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<!-- Declare the name of this tool in Visual Studio's Properties dialog box -->
+	<Rule Name="X360SL" PageTemplate="tool" DisplayName="Xbox 360 Effect Compiler Tool" Order="200">
+
+		<!-- Store the data in the project file -->
+		<Rule.DataSource>
+			<DataSource Persistence="ProjectFile" ItemType="X360SL" />
+		</Rule.DataSource>
+
+		<!-- List of categories in the dialog box -->
+		<Rule.Categories>
+			<Category Name="General" DisplayName="General" />
+			<Category Name="Optimization" DisplayName="Optimization" />
+			<Category Name="Preprocessor" DisplayName="Preprocessor" />
+			<Category Name="Output Files" DisplayName="Output Files" />
+			<Category Name="Advanced" DisplayName="Advanced" />
+			<Category Name="Command Line" DisplayName="Command Line" Subtype="CommandLine" />
+		</Rule.Categories>
+
+		<!-- Options for the General sub menu -->
+		<StringListProperty Category="General" Name="AdditionalIncludeDirectories"
+			DisplayName="Additional Include Directories"
+			Description="Specifies one or more directories to add to the include path; seperate with semi-colons if more than one. (/I [path])"
+			Switch="/I &quot;[value]&quot;" />
+			
+		<BoolProperty Category="General" Name="NoLogo"
+			DisplayName="Suppress Startup Banner"
+			Description="Suppress the display of the sign-on banner when the compiler starts up and display of information messages during compiling. (/nologo)"
+			Switch="/nologo" />
+	
+		<BoolProperty Category="General" Name="DisableValidation"
+			DisplayName="Disable Validation"
+			Description="Suppress validating the shader. (/Vd)"
+			Switch="/Vd" />
+
+		<BoolProperty Category="General" Name="DisableValidationZColor"
+			DisplayName="Disable Validation of Z- and Color-Pass outputs"
+			Description="Suppress validating the comparison of Z- and Color-Pass outputs. (/Vz)"
+			Switch="/Vz" />
+
+		<BoolProperty Category="General" Name="EnableMicrocodeVerification"
+			DisplayName="Enable Microcode Verification"
+			Description="Enable microcode verification (/XVe)"
+			Switch="/XVe" />
+
+		<DynamicEnumProperty Category="General" Name="X360SLBeforeTargets" EnumProvider="Targets" IncludeInCommandLine="False"
+			DisplayName="Execute Before"
+			Description="Specifies the targets for the build customization to run before.">
+			<DynamicEnumProperty.ProviderSettings>
+				<NameValuePair Name="Exclude" Value="^X360SLBeforeTargets|^Compute" />
+			</DynamicEnumProperty.ProviderSettings>
+			<DynamicEnumProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="" HasConfigurationCondition="true" />
+			</DynamicEnumProperty.DataSource>
+		</DynamicEnumProperty>
+		<DynamicEnumProperty Category="General" Name="X360SLAfterTargets" EnumProvider="Targets" IncludeInCommandLine="False"
+			DisplayName="Execute After"
+			Description="Specifies the targets for the build customization to run after.">
+			<DynamicEnumProperty.ProviderSettings>
+				<NameValuePair Name="Exclude" Value="^X360SLAfterTargets|^Compute" />
+			</DynamicEnumProperty.ProviderSettings>
+			<DynamicEnumProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="" HasConfigurationCondition="true" />
+			</DynamicEnumProperty.DataSource>
+		</DynamicEnumProperty>
+
+		<!-- Options for the Optimization sub menu -->
+		<EnumProperty Category="Optimization" Name="Optimization"
+			DisplayName="Optimization Level"
+			Description="Sets the Optimization level, where level = 0 or 1. (/Od to disable)">
+			<EnumValue Name="0" DisplayName="Disabled" Switch="/Od" />
+			<EnumValue Name="1" DisplayName="Level 1" Switch="" />
+		</EnumProperty>
+	
+		<BoolProperty Category="Optimization" Name="DisablePreshaders"
+			DisplayName="Disable preshaders."
+			Description="Disable preshaders. (/Op)"
+			Switch="/oP" />
+	
+		<EnumProperty Category="Optimization" Name="MatricesPacking"
+			DisplayName="Order of Matrices packing"
+			Description="Sets the matrix packing order to either be Row Major or Column Major. (/Zpr, /Zpc)">
+			<EnumValue Name="Row" DisplayName="Row Major Order" Switch="/Zpr" />
+			<EnumValue Name="Column" DisplayName="Column Major Order" Switch="/Zpc" />
+		</EnumProperty>
+		
+		<BoolProperty Category="Optimization" Name="ForcePartialPrecision"
+			DisplayName="Force partial precision."
+			Description="Force partial precision. (/Gpp)"
+			Switch="/Gpp" />
+			
+		<EnumProperty Category="Optimization" Name="FlowControl"
+			DisplayName="Flow control hinting"
+			Description="Sets the flow control preference to eithre avoid branching or prefer branching. (/Gfa, /Gfp)">
+			<EnumValue Name="Avoid" DisplayName="Avoid flow control constructs" Switch="/Gfa" />
+			<EnumValue Name="Prefer" DisplayName="Prefer flow control constructs" Switch="/Gfp" />
+		</EnumProperty>
+	
+		<BoolProperty Category="Optimization" Name="EnableStrictMode"
+			DisplayName="Enable strict mode."
+			Description="Enable strict mode. (/Ges)"
+			Switch="/Ges" />
+		
+		<BoolProperty Category="Optimization" Name="EnableBackwardsCompatibility"
+			DisplayName="Enable backwards compatibility mode."
+			Description="Enable backwards compatibility mode. (/Gec)"
+			Switch="/Gec" />
+
+		<BoolProperty Category="Optimization" Name="AddVFetche"
+			DisplayName="Enable vfetche instructions"
+			Description="Automatically add vfetche instructions for XPS (/XOautovfe)"
+			Switch="/XOautovfe" />
+
+		<BoolProperty Category="Optimization" Name="EnableAssert"
+			DisplayName="Enable assert() intrinsic."
+			Description="Enable assert() intrinsic (/Xassert)"
+			Switch="/Xassert" />
+
+		<BoolProperty Category="Optimization" Name="IsolateAssert"
+			DisplayName="Enable assert() intrinsic."
+			Description="Enable assert() intrinsic with [isolate] semantics (/Xassert:isolate)"
+			Switch="/Xassert:isolate" />
+
+		<!-- Options for the Preprocessor sub menu -->
+		<StringListProperty Category="Preprocessor" Name="PreprocessorDefinitions"
+			DisplayName="Preprocessor Definitions"
+			Description="Defines preprocessing symbols for your source file. (/D[symbol])"
+			Switch="/D&quot;[value]&quot;" />
+		
+		<EnumProperty Category="Preprocessor" Name="GeneratePreprocessedSourceListing"
+			DisplayName="Generate Preprocessed Source Listing"
+			Description="Generates a preprocessed source listing. (/P)">
+			<EnumValue Name="false" Switch="" DisplayName="No Listing" Description="No listing." />
+			<EnumValue Name="true" Switch="/P" DisplayName="Preprocessed Listing" Description="Preprocess the source with the lexical analyzer.">
+				<Argument Property="PreprocessedSourceListingName" IsRequired="true" />
+			</EnumValue>
+		</EnumProperty>
+		
+		<StringProperty Category="Preprocessor" Name="PreprocessedSourceListingName"
+			DisplayName="Preprocess source file"
+			Description="Specifies the preprocessed source file output (/P[name])" />
+		
+		<BoolProperty Category="Preprocessor" Name="ColorCodeAssembly"
+			DisplayName="Color coded assembly"
+			Description="Output color-coded assembly instructions in listings. (/Cc)"
+			Switch="/Cc" />
+		
+		<BoolProperty Category="Preprocessor" Name="ShowIncludeProcess"
+			DisplayName="Display details about the include process."
+			Description="Display details about the include process. (/Vi)"
+			Switch="/Vi" />
+
+		<BoolProperty Category="Preprocessor" Name="HideMicrocodeAddresses"
+			DisplayName="Hide Microcode Addresses"
+			Description="Hide microcode addresses. (/Xudha)"
+			Switch="/Xudha" />
+			
+		<BoolProperty Category="Preprocessor" Name="HideMicrocodeDetails"
+			DisplayName="Hide Microcode Details"
+			Description="Hide microcode details (/Xudhd)"
+			Switch="/Xudhd" />
+
+		<BoolProperty Category="Preprocessor" Name="ShowMicrocodeDefaults"
+			DisplayName="Show Microcode Defaults"
+			Description="Show microcode defaults (/Xudsdv)"
+			Switch="/Xudsdv" />
+
+		<BoolProperty Category="Preprocessor" Name="ShowMicrocodePatched"
+			DisplayName="Show Microcode Patched Values"
+			Description="Show microcode patched values (/Xudsp)"
+			Switch="/Xudsp" />
+
+		<BoolProperty Category="Preprocessor" Name="ShowMicrocodeRuntime"
+			DisplayName="Show Microcode Runtime"
+			Description="Show microcode runtime (/Xudsrd)"
+			Switch="/Xudsrd" />
+
+		<BoolProperty Category="Preprocessor" Name="HideShaderTiming"
+			DisplayName="Hide Shader Timing Estimate"
+			Description="Hide shader timing estimate (/Xudhte)"
+			Switch="/Xudhte" />
+
+		<BoolProperty Category="Preprocessor" Name="ShowMicrocodeRTF"
+			DisplayName="Show Microcode in Rich Text Format"
+			Description="Show microcode in rich text format (/Xudsrtf)"
+			Switch="/Xudsrtf" />
+
+		<!-- Options for the Output Files sub menu -->
+		<StringProperty Category="Output Files" Name="ObjectFileName"
+			DisplayName="Object File Name"
+			Description="Specifies the name of the output object file. (/Fo[file])"
+			Switch="/Fo&quot;[value]&quot;" />
+		
+		<StringProperty Category="Output Files" Name="HeaderFileName"
+			DisplayName="Header File Name"
+			Description="Specifies the name of the output header file. (/Fh[file])"
+			Switch="/Fh&quot;[value]&quot;" />
+
+		<EnumProperty Category="Output Files" Name="AssemblerOutput" DisplayName="Assembler Output" Description="Specifies the contents of assembly language output file. (/Fc, /Fx)">
+			<EnumValue Name="NoListing" Switch="" DisplayName="No Listing" Description="No listing." />
+			<EnumValue Name="AssemblyCode" Switch="/Fc" DisplayName="Assembly-Only Listing" Description="Assembly code; .asm">
+				<Argument Property="AssemblyListingFileName" IsRequired="true" />
+			</EnumValue>
+			<EnumValue Name="AssemblyAndHexCode" Switch="/Fx" DisplayName="Assembly With Hex Code" Description="Machine and assembly code; .cod">
+				<Argument Property="AssemblyListingFileName" IsRequired="true" />
+			</EnumValue>
+		</EnumProperty>
+
+		<StringProperty Category="Output Files" Name="AssemblyListingFileName"
+			DisplayName="Assembly Listing File Name"
+			Description="Specifies the name of the assembly output file. (/Fc[file], /Fx[file])" />
+
+		<BoolProperty Category="Output Files" Name="GenerateDebugInformation"
+			DisplayName="Generate Debug Information"
+			Description="Generates Debug Information. (/XZi)"
+			Switch="/XZi" />
+		
+		<StringProperty Category="Output Files" Name="ProgramDatabaseFile"
+			DisplayName="Program Database File name"
+			Description="Specifies a name for a shader-generated UPDB file (/XFd[name])"
+			Switch="/XFd&quot;[value]&quot;" />
+
+		<!-- Options for the Advanced sub menu -->
+		<StringProperty Category="Advanced" Name="EntryPointName"
+			DisplayName="Shader Entry Point"
+			Description="Specifies the entry point of the shader. (/E[name])"
+			Switch="/E&quot;[value]&quot;" />
+		
+		<StringProperty Category="Advanced" Name="VariableName"
+			DisplayName="Variable name"
+			Description="When generating a header file, specify the variable name. (/Vn[name])"
+			Switch="/Vn&quot;[value]&quot;" />
+	
+		<EnumProperty Category="Advanced" Name="TargetProfile"
+			DisplayName="Shader Model"
+			Description="Selects the shader model to compile for. (/T[profile])">
+			<EnumValue Name="vs_1_1" DisplayName="Vertex Shader 1.1" Switch="/Tvs_1_1" />
+			<EnumValue Name="vs_2_0" DisplayName="Vertex Shader 2.0" Switch="/Tvs_2_0" />
+			<EnumValue Name="vs_2_a" DisplayName="Vertex Shader 2.a" Switch="/Tvs_2_a" />
+			<EnumValue Name="vs_2_sw" DisplayName="Vertex Shader 2.sw" Switch="/Tvs_2_sw" />
+			<EnumValue Name="vs_3_0" DisplayName="Vertex Shader 3.0" Switch="/Tvs_3_0" />
+			<EnumValue Name="vs_3_sw" DisplayName="Vertex Shader 3.sw" Switch="/Tvs_3_sw" />
+			<EnumValue Name="vs_3_swx" DisplayName="Vertex Shader 3.swx" Switch="/Tvs_3_swx" />
+			<EnumValue Name="ps_1_1" DisplayName="Pixel Shader 1.1" Switch="/Tps_1_1" />
+			<EnumValue Name="ps_1_2" DisplayName="Pixel Shader 1.2" Switch="/Tps_1_2" />
+			<EnumValue Name="ps_1_3" DisplayName="Pixel Shader 1.3" Switch="/Tps_1_3" />
+			<EnumValue Name="ps_1_4" DisplayName="Pixel Shader 1.4" Switch="/Tps_1_4" />
+			<EnumValue Name="ps_2_0" DisplayName="Pixel Shader 2.0" Switch="/Tps_2_0" />
+			<EnumValue Name="ps_2_a" DisplayName="Pixel Shader 2.a" Switch="/Tps_2_a" />
+			<EnumValue Name="ps_2_b" DisplayName="Pixel Shader 2.b" Switch="/Tps_2_b" />
+			<EnumValue Name="ps_2_sw" DisplayName="Pixel Shader 2.sw" Switch="/Tps_2_sw" />
+			<EnumValue Name="ps_3_0" DisplayName="Pixel Shader 3.0" Switch="/Tps_3_0" />
+			<EnumValue Name="ps_3_sw" DisplayName="Pixel Shader 3.sw" Switch="/Tps_3_sw" />
+			<EnumValue Name="tx_1_0" DisplayName="Texture Shader 1.0" Switch="/Ttx_1_0" />
+			<EnumValue Name="fx_2_0" DisplayName="Effect Shader 2.0" Switch="/Tfx_2_0" />
+			<EnumValue Name="fxl_3_0 " DisplayName="Effect Shader 3.0" Switch="/Tfxl_3_0" />
+		</EnumProperty>
+			
+		<BoolProperty Category="Advanced" Name="FormatRaw"
+			DisplayName="Output Raw Microcode"
+			Description="Output raw microcode (just the physical part). (/XuFormatRaw)"
+			Switch="/XuFormatRaw" />
+		
+		<EnumProperty Category="Advanced" Name="DisableBackend"
+			DisplayName="Disable Microcode Backend"
+			Description="Disable microcode backend (/Xudhd)">
+			<EnumValue Name="0" Switch="" DisplayName="All backends enabled" Description="No listing." />
+			<EnumValue Name="1" Switch="/Xbe:1" DisplayName="Disable Backend 1" Description="Disable Backend 1." />
+			<EnumValue Name="2" Switch="/Xbe:2" DisplayName="Disable Backend 2" Description="Disable Backend 2." />
+			<EnumValue Name="3" Switch="/Xbe:3" DisplayName="Disable Backend 3" Description="Disable Backend 3." />
+		</EnumProperty>
+
+		<BoolProperty Category="Advanced" Name="ZeroInit"
+			DisplayName="Local Variables Initialization"
+			Description="Initialize local variables to zero (/XZc:zeroInit)"
+			Switch="/XZc:zeroInit" />
+
+		<BoolProperty Category="Advanced" Name="DisableAutomaticZPrepass"
+			DisplayName="Disable Automatic ZPrepass"
+			Description="Disable automatic Z prepass processing (/XOautoz-)"
+			Switch="/XOautoz-" />
+
+		<BoolProperty Category="Advanced" Name="RemoveUnusedInputs"
+			DisplayName="Remove unused inputs"
+			Description="Remove unused pixel shader inputs (/XQremoveunusedpsinputs)"
+			Switch="/XQremoveunusedpsinputs" />
+
+		<IntProperty Category="Advanced" Name="MaxTempReg"
+			DisplayName="Maximum temp registers"
+			Description="Maximum number of temp registers available (/Xmaxtempreg:[value])"
+			Switch="/Xmaxtempreg:" />
+
+		<StringProperty Category="Advanced" Name="SetRange"
+			DisplayName="Sampler registers available"
+			Description="Set the ranges of sampler registers 'pixelstart-pixelend,vertexstart-vertexend' (/Xsampreg:[value])"
+			Switch="/Xsampreg:" />
+
+		<BoolProperty Category="Advanced" Name="DefineFXLFromVariable"
+			DisplayName="Define FXL Parameters"
+			Description="Define FXL parameters from variable rather than semantic names (/XfxPv)"
+			Switch="/XfxPv" />
+
+		<BoolProperty Category="Advanced" Name="AutoStoreFXLVariable"
+			DisplayName="Store FXL variable names"
+			Description="Automatically store FXL parameter variable names using the string annotation '_VariableName' (/XfxAv)"
+			Switch="/XfxAv" />
+
+		<BoolProperty Category="Advanced" Name="AutoStoreFXLSemantic"
+			DisplayName="Store FXL semantic names"
+			Description="Automatically store FXL parameter semantic names using the string annotation '_SemanticName' (/XfxAs)"
+			Switch="/XfxAs" />
+
+		<!-- Options for the sample command line -->
+		<StringProperty Category="Command Line" Name="Inputs" IsRequired="true">
+			<StringProperty.DataSource>
+				<DataSource Persistence="ProjectFile" ItemType="X360SL" SourceType="Item" />
+			</StringProperty.DataSource>
+		</StringProperty>
+			
+		<StringProperty Subtype="AdditionalOptions" Name="AdditionalOptions" Category="Command Line"
+			DisplayName="Additional Options"
+			Description="Additional Options" />
+
+		<!-- Hidden data -->
+		<StringProperty Name="CommandLineTemplate" DisplayName="Command Line" Visible="False" IncludeInCommandLine="False" />
+		<StringListProperty Name="AdditionalDependencies" DisplayName="Additional Dependencies" IncludeInCommandLine="False" Visible="False" />
+		<StringProperty Name="ExecutionDescription" DisplayName="Execution Description" IncludeInCommandLine="False" Visible="False" />
+	</Rule>
+
+	<!-- Name of the tool for the list of tools -->
+	<ItemType Name="X360SL" DisplayName="Xbox 360 Effect Compiler Tool" />
+
+	<!-- File extensions this compiler will work with -->
+	<FileExtension Name="*.x360sl" ContentType="X360SL" />
+
+	<!-- Type of content -->
+	<ContentType Name="X360SL" DisplayName="Xbox 360 Effect Compiler Tool" ItemType="X360SL" />
+</ProjectSchemaDefinitions>

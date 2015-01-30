@@ -1,0 +1,246 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2A6C1AF9B948F23240C66FA8 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60566A081602146F3C8BA8CA /* Carbon.framework */; };
+		697F6B45B255948B8C32161D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */; };
+		6F579F13669901825CAF29E1 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BBF96056AA4E7B57C08772 /* Cocoa.framework */; };
+		9056A653F39A3AD45B3368C1 /* tyme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6A53B5DA9AE81509C67ACA44 /* tyme.cpp */; };
+		982CF8A51DDE0C564C332B4E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957F7268BCFABFC0E258709B /* QuartzCore.framework */; };
+		DB8CFD54D2907CEE2E909E8F /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061B328817055E8B2E193D6 /* AppKit.framework */; };
+		F47777514B005107E7FB0791 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB663B78C243F425CB5F622D /* IOKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		3966991FFF9696F645B0B3C9 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.glsl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h",
+			);
+			script = "${SDKS}/macosx/bin/stripcomments ${INPUT_FILE_PATH} -c -l g_${INPUT_FILE_BASE} ${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		04BBF96056AA4E7B57C08772 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		18BB6816708658CFBF532F21 /* tyme */ = {isa = PBXFileReference; explicitFileType = compiled.mach-o.executable; includeInIndex = 0; path = tyme; sourceTree = BUILT_PRODUCTS_DIR; };
+		18E4FDC34A8E68253104A859 /* tyme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tyme.h; path = source/tyme.h; sourceTree = SOURCE_ROOT; };
+		53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = burger.toolxcoosx.xcconfig; path = xcode/burger.toolxcoosx.xcconfig; sourceTree = SDKS; };
+		60566A081602146F3C8BA8CA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		6061B328817055E8B2E193D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6A53B5DA9AE81509C67ACA44 /* tyme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tyme.cpp; path = source/tyme.cpp; sourceTree = SOURCE_ROOT; };
+		957F7268BCFABFC0E258709B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		CB663B78C243F425CB5F622D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C25DF9CFAE22A825BD5C5BD9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB8CFD54D2907CEE2E909E8F /* AppKit.framework in Frameworks */,
+				2A6C1AF9B948F23240C66FA8 /* Carbon.framework in Frameworks */,
+				6F579F13669901825CAF29E1 /* Cocoa.framework in Frameworks */,
+				F47777514B005107E7FB0791 /* IOKit.framework in Frameworks */,
+				697F6B45B255948B8C32161D /* OpenGL.framework in Frameworks */,
+				982CF8A51DDE0C564C332B4E /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CE489F4A9041625DE5927C3 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				6A53B5DA9AE81509C67ACA44 /* tyme.cpp */,
+				18E4FDC34A8E68253104A859 /* tyme.h */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
+		6555983C4FFDAFC88D6ED936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6061B328817055E8B2E193D6 /* AppKit.framework */,
+				60566A081602146F3C8BA8CA /* Carbon.framework */,
+				04BBF96056AA4E7B57C08772 /* Cocoa.framework */,
+				CB663B78C243F425CB5F622D /* IOKit.framework */,
+				9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */,
+				957F7268BCFABFC0E258709B /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9796CE949CD3951E99BB35F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				18BB6816708658CFBF532F21 /* tyme */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5CC592B47749E19881B655B /* tyme */ = {
+			isa = PBXGroup;
+			children = (
+				6555983C4FFDAFC88D6ED936 /* Frameworks */,
+				9796CE949CD3951E99BB35F6 /* Products */,
+				4CE489F4A9041625DE5927C3 /* source */,
+				53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */,
+			);
+			name = tyme;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D675D709CCD53F92C871120F /* tyme */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E66097C859F6E997A6CA8550 /* Build configuration list for PBXNativeTarget "tyme" */;
+			buildPhases = (
+				D7F480DFF42940BD5ABBF7CA /* Sources */,
+				C25DF9CFAE22A825BD5C5BD9 /* Frameworks */,
+				B491C6B43A4AFEBA72EDE202 /* ShellScript */,
+			);
+			buildRules = (
+				3966991FFF9696F645B0B3C9 /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = tyme;
+			productName = tyme;
+			productReference = 18BB6816708658CFBF532F21 /* tyme */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0A401FEC24852496E8217886 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 66A8E80F13353EA8FDCC53FD /* Build configuration list for PBXProject "tymexc5osx" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A5CC592B47749E19881B655B /* tyme */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D675D709CCD53F92C871120F /* tyme */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B491C6B43A4AFEBA72EDE202 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${SRCROOT}/bin ]; then mkdir ${SRCROOT}/bin; fi\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D7F480DFF42940BD5ABBF7CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9056A653F39A3AD45B3368C1 /* tyme.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		33396427F999644DF47320B6 /* Internal */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		505F490929E24EC678E81CD3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		6905EDFFC97070FF9ADA889A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		8DEA1A5E955AA7FC51A58B9D /* Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		A15AFDF46AF26C2B0E2E5BE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		E6E75539EF4F6357E750E70B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66A8E80F13353EA8FDCC53FD /* Build configuration list for PBXProject "tymexc5osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6E75539EF4F6357E750E70B /* Debug */,
+				33396427F999644DF47320B6 /* Internal */,
+				505F490929E24EC678E81CD3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E66097C859F6E997A6CA8550 /* Build configuration list for PBXNativeTarget "tyme" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6905EDFFC97070FF9ADA889A /* Debug */,
+				8DEA1A5E955AA7FC51A58B9D /* Internal */,
+				A15AFDF46AF26C2B0E2E5BE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0A401FEC24852496E8217886 /* Project object */;
+}

@@ -1,0 +1,49 @@
+
+HydroCarbon was written by Rebecca Ann Heineman
+becky@burgerbecky.com
+
+Revision History:
+
+1.1
+Updated to Codewarrior 10.0 and flattened the resources to it can be put into perforce source control.
+
+1.0.1
+Converted to CarbonLib. This allowed the plug-in to work in MacOS X natively for CodeWarrior 7.0.
+
+1.0
+Initial version
+
+What is it?
+
+Hydrocarbon is a plug-in linker for Metrowerks CodeWarrior Pro 5 or later.
+
+It will take two PowerPC apps and merge them into a single app that can launch the FIRST one if you are running the App in Classic (MacOS 9.x or earlier) and launch the SECOND one if you are running on MacOS X or later.
+
+This way, you can have a single application that works under Classic and Carbon without having two seperate files.
+
+How to use:
+
+You make a target that uses the MacOS Merge linker. This type of target is one you create to make a "FAT" apps.
+
+Drag the plug-in "HydroCarbon Linker" into your Metrowerks:CodeWarrior Plugins:Linkers folder
+
+Make sure you "QUIT" CodeWarrior. Then re-launch CodeWarrior to properly install the plug-in.
+
+Open your project and create a new target.
+
+Select the control panels.
+
+Select Target:Target Settings from the list on the left.
+
+In the box on the right, select the control "Linker:" and choose "MacOS Merge"
+
+Same box, select the control "Post-Linker:" and choose "HydroCarbon" (If HydroCarbon is not an option then you didn't drag the plug in into the right folder or you forgot to QUIT and relaunch CodeWarrior)
+
+For the project, insert a PowerPC Classic app, and a PowerPC Carbon app. You can also add a 68k app if you choose. 
+
+You are done. HydroCarbon will use the finder flags from the Carbon App and use the LARGEST stack that your PowerPC apps have set (Default is 64K)
+
+Important!!!
+
+The link order should have the Classic app first on the list. Followed by the Carbon app. Bad things could happen if the Carbon app was first in the list. You can look at the link order by selecting the "Link Order" tab of your project. The files are processed from top to bottom in that order.
+

@@ -1,0 +1,244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		31693C57B6C20632F7279F3E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04BBF96056AA4E7B57C08772 /* Cocoa.framework */; };
+		3DB4157DAA259EEC4D600A7A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957F7268BCFABFC0E258709B /* QuartzCore.framework */; };
+		949E485826FE494EF5CB848C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60566A081602146F3C8BA8CA /* Carbon.framework */; };
+		9CDD80C687694E07F5EA27D5 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061B328817055E8B2E193D6 /* AppKit.framework */; };
+		C65572DB4642EB8ED3424728 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */; };
+		DA5D841FB05F2A91EC12C089 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB663B78C243F425CB5F622D /* IOKit.framework */; };
+		E8318A01BBF07274F56136BC /* addlf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6338C6F9652DAB0DB93B24B7 /* addlf.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		264A179FECA8E7FE2447CDEF /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			filePatterns = "*.glsl";
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+				"${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h",
+			);
+			script = "${SDKS}/macosx/bin/stripcomments ${INPUT_FILE_PATH} -c -l g_${INPUT_FILE_BASE} ${INPUT_FILE_DIR}/${INPUT_FILE_BASE}.h";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXFileReference section */
+		04BBF96056AA4E7B57C08772 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		243EE7166A0D5845BD0CF69E /* addlf */ = {isa = PBXFileReference; explicitFileType = compiled.mach-o.executable; includeInIndex = 0; path = addlf; sourceTree = BUILT_PRODUCTS_DIR; };
+		43720A7EDACED9407CCC4C3E /* addlf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addlf.h; path = source/addlf.h; sourceTree = SOURCE_ROOT; };
+		53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = burger.toolxcoosx.xcconfig; path = xcode/burger.toolxcoosx.xcconfig; sourceTree = SDKS; };
+		60566A081602146F3C8BA8CA /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		6061B328817055E8B2E193D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		6338C6F9652DAB0DB93B24B7 /* addlf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = addlf.cpp; path = source/addlf.cpp; sourceTree = SOURCE_ROOT; };
+		957F7268BCFABFC0E258709B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		CB663B78C243F425CB5F622D /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A38ABC2598511AB659872D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CDD80C687694E07F5EA27D5 /* AppKit.framework in Frameworks */,
+				949E485826FE494EF5CB848C /* Carbon.framework in Frameworks */,
+				31693C57B6C20632F7279F3E /* Cocoa.framework in Frameworks */,
+				DA5D841FB05F2A91EC12C089 /* IOKit.framework in Frameworks */,
+				C65572DB4642EB8ED3424728 /* OpenGL.framework in Frameworks */,
+				3DB4157DAA259EEC4D600A7A /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CE489F4A9041625DE5927C3 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				6338C6F9652DAB0DB93B24B7 /* addlf.cpp */,
+				43720A7EDACED9407CCC4C3E /* addlf.h */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
+		6555983C4FFDAFC88D6ED936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6061B328817055E8B2E193D6 /* AppKit.framework */,
+				60566A081602146F3C8BA8CA /* Carbon.framework */,
+				04BBF96056AA4E7B57C08772 /* Cocoa.framework */,
+				CB663B78C243F425CB5F622D /* IOKit.framework */,
+				9AC54CC47F3C0DD9956B9AD3 /* OpenGL.framework */,
+				957F7268BCFABFC0E258709B /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		71BBA139A05FB2CD2BEE0AD7 /* addlf */ = {
+			isa = PBXGroup;
+			children = (
+				6555983C4FFDAFC88D6ED936 /* Frameworks */,
+				9796CE949CD3951E99BB35F6 /* Products */,
+				4CE489F4A9041625DE5927C3 /* source */,
+				53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */,
+			);
+			name = addlf;
+			sourceTree = "<group>";
+		};
+		9796CE949CD3951E99BB35F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				243EE7166A0D5845BD0CF69E /* addlf */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3AECED6AC89D8B849A2EE63E /* addlf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52D5A367A76CFEDF546AEC95 /* Build configuration list for PBXNativeTarget "addlf" */;
+			buildPhases = (
+				A87DA1C24C4F1380942B0DB4 /* Sources */,
+				A38ABC2598511AB659872D0B /* Frameworks */,
+				B491C6B43A4AFEBA72EDE202 /* ShellScript */,
+			);
+			buildRules = (
+				264A179FECA8E7FE2447CDEF /* PBXBuildRule */,
+			);
+			dependencies = (
+			);
+			name = addlf;
+			productName = addlf;
+			productReference = 243EE7166A0D5845BD0CF69E /* addlf */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8CD2A732ECB36D652AAA1239 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = A1143803958400ABDD938922 /* Build configuration list for PBXProject "addlfxc3osx" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 71BBA139A05FB2CD2BEE0AD7 /* addlf */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3AECED6AC89D8B849A2EE63E /* addlf */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B491C6B43A4AFEBA72EDE202 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${SRCROOT}/bin ]; then mkdir ${SRCROOT}/bin; fi\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A87DA1C24C4F1380942B0DB4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8318A01BBF07274F56136BC /* addlf.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		05ED752AA50B37C8A9B62EE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		15CA20824E5E119555CC07BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		239065B52DC5ACE9855C0E4B /* Internal */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		44249E33AB4B824AF4632CA8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		70BA3EC9920946D698017D2D /* Internal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Internal;
+		};
+		C02A809543C6D7054D423FF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52D5A367A76CFEDF546AEC95 /* Build configuration list for PBXNativeTarget "addlf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44249E33AB4B824AF4632CA8 /* Debug */,
+				70BA3EC9920946D698017D2D /* Internal */,
+				05ED752AA50B37C8A9B62EE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1143803958400ABDD938922 /* Build configuration list for PBXProject "addlfxc3osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				15CA20824E5E119555CC07BD /* Debug */,
+				239065B52DC5ACE9855C0E4B /* Internal */,
+				C02A809543C6D7054D423FF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8CD2A732ECB36D652AAA1239 /* Project object */;
+}

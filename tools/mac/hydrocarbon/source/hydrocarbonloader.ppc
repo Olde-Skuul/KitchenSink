@@ -1,0 +1,311 @@
+;
+; Assembly for the HydroCarbon loader
+;
+; Copyright 1999-2014 by Rebecca Ann Heineman becky@burgerbecky.com
+;
+; It is released under an MIT Open Source license. Please see LICENSE
+; for license details. Yes, you can use it in a
+; commercial title without paying anything, just give me a credit.
+; Please? It's not like I'm asking you for money!
+;
+; Please note. This code cannot run without patching.
+; It is because I want to look for the same symbol from two different
+; containers. The linker can't do this. So I made a fake library called
+; CarbonCodeFake which has all the names misspelled by one letter.
+; I then patch the misspellings to the proper spelling and it will
+; fix the code. Since this also will load one of two code
+; fragments, there will be a second patch to set the entry
+; for the Classic and Carbon code fragments.
+;
+; All code fragments have three entry points. __initialize()
+; which is called on load. start() which is called to execute
+; the main code and terminate() for code cleanup.
+;
+; For me, __initialize() will determine whether I'm running
+; classic or OSX, then I call the __initialize() functon of the
+; appropriate code fragment. I then set up for the calls to start()
+; and terminate().
+;
+; start() just passed through to the start function of the chosen 
+; code fragment.
+;
+; terminate() will first call the terminate function, then it
+; will call CloseConnection to release the selected code
+; fragment.
+;
+
+	include 'CodeFragments.a'
+
+;
+; Publics
+;
+	
+	EXPORT	__initialize[DS],.__initialize[PR]
+	EXPORT	start[DS],.start[PR]
+	EXPORT	terminate[DS],.terminate[PR]
+
+;
+; Import from Classic and Carbon
+;
+
+	IMPORT RegistryEntrySearch[DS]	;This doesn't exist in MacOSX
+	IMPORT FloseConnection[DS]	;CFragManager (Note the intentional misspelling)
+	IMPORT FetDiskFragment[DS]	;CFragManager (Note the intentional misspelling)
+	IMPORT CloseConnection[DS]	;CarbonLib
+	IMPORT GetDiskFragment[DS]	;CarbonLib
+	
+	TOC
+	tc	__initialize[TC],__initialize[DS]
+	tc	start[TC],start[DS]
+	tc	terminate[TC],terminate[DS]
+	tc	CloseConnectionCarbon[TC],CloseConnection[DS]	;CarbonLib
+	tc	GetDiskFragmentCarbon[TC],GetDiskFragment[DS]	;CarbonLib
+	tc	CloseConnectionClassic[TC],FloseConnection[DS]	;CFragManager Will be patched
+	tc	GetDiskFragmentClassic[TC],FetDiskFragment[DS]	;CFragManager Will be patched
+	tc	RegistryEntrySearch[TC],RegistryEntrySearch[DS]	;Classic
+
+;
+; My TOC entries
+;
+
+	CSECT	__initialize[DS]
+		dc.l .__initialize[PR]
+		dc.l TOC[tc0]
+
+	CSECT	start[DS]
+		dc.l .start[PR]
+		dc.l TOC[tc0]
+
+	CSECT	terminate[DS]
+		dc.l .terminate[PR]
+		dc.l TOC[tc0]
+
+;
+; My data stored in the TOC
+;
+
+	CSECT MyCloseConnection[TD]
+		dc.l 0					;Pointer to the carbon or classic function CloseConnection()
+		
+	CSECT MyConnectionID[TD]
+		dc.l 0					;Pointer to the ConnectionID returned by GetDiskFragment()
+		
+	CSECT MyMainProc[TD]
+		dc.l 0					;Pointer to main() of the chosen app.
+
+;
+; This data is patched by the post-linker
+; Note : This pattern doesn't compress, makes it easy to patch
+;
+
+	CSECT ClassicOffset[TD]
+		dc.l $D5AA9601			;This is the offset to the Classic code
+
+	CSECT ClassicLength[TD]
+		dc.l $D5AA9602			;This is the length of the Classic code
+
+	CSECT CarbonOffset[TD]
+		dc.l $D5AA9603			;This is the offset of the Carbon (OSX) code
+
+	CSECT CarbonLength[TD]
+		dc.l $D5AA9604			;This is the length of the Carbon (OSX) code
+
+;
+; Here is the main entry point for HydroCarbon.
+;
+; I first check if RegistryEntrySearch exists. If present, then you
+; are running in classic and I'll just go from there.
+;
+; Otherwise, I'll check if you are running Carbon under 10 and work accordingly
+;
+; That's pretty much it. The magic is that this code cannot run by
+; itself since I can't fool the linker to target CloseConnection/GetDiskFragment
+; to point to two different libraries unless I directly modify this binary.
+; 
+; Fun fun fun, but then I like doing this stuff!
+;
+;int __initialize()
+;{
+;	unsigned int Offset;		// r4
+;	unsigned int Length;		// r5
+;	void *MyCloseConnection;	//r11
+;	void *MyGetDiskFragment;	//r12
+;	
+;	if (!RegistryEntrySearch &&
+;		FloseConnection && FetDiskFragment) {
+;		Offset = CarbonOffset;
+;		Length = CarbonLength;
+;		MyCloseConnection = FloseConnection;
+;		MyGetDiskFragment = FetDiskFragment;
+;	} else {
+;		Offset = ClassicOffset;
+;		Length = ClassicLength;
+;		MyCloseConnection = CloseConnection;
+;		MyGetDiskFragment = GetDiskFragment;
+;	}
+;	if (!MyCloseConnection || !MyGetDiskFragment) {
+;		return cfragNoLibraryErr;
+;	}
+;	return MyGetDiskFragment(fragLocator.u.inSegs.fileSpec,Offset,Length,0,kDataForkCFragLocator,&MyConnectionID,&MyMainProc);
+;}
+;
+
+	CSECT	.__initialize[PR]
+	
+	mflr	r0
+	lwz		r7,RegistryEntrySearch[TC](rtoc)	;RegistryEntrySearch() Classic only
+	stw		r0,8(sp)
+	cmplwi	r7,0								;is &RegisteryEntrySearch == NULL?
+	stwu	SP,-64(SP)
+
+;
+; RegistryEntrySearch() only exists in classic
+; 
+	
+	bne		TryClassic	;This is classic!
+
+;
+; Failsafe for OSX
+;
+	
+	lwz		r12,GetDiskFragmentCarbon[TC](rtoc)	;GetDiskFragment() Carbon
+	lwz		r11,CloseConnectionCarbon[TC](rtoc)	;CloseConnection() Carbon
+	cmplwi	r12,0		;if ((&GetDiskFragmentCarbon != NULL) &&
+	beq		TryClassic
+	cmplwi	r11,0		; (&CloseConnectionCarbon != NULL)) {
+	beq		TryClassic
+	
+;
+; I'm running OSX
+;
+	
+	lwz		r4,CarbonOffset[TD](rtoc)		;Get the offset
+	lwz		r5,CarbonLength[TD](rtoc)		;Segment length
+	b		LetsGo
+
+;
+; Am I in Classic?
+;
+
+TryClassic:
+	lwz		r12,GetDiskFragmentClassic[TC](rtoc)
+	lwz		r11,CloseConnectionClassic[TC](rtoc)	;Get the OSX version
+	cmplwi	r12,0		;GetDiskFragmentClassic		;Test for load time link errors
+	beq		ImScrewed
+	cmplwi	r11,0		;CloseConnectionClassic
+	beq		ImScrewed
+
+;
+; I'm running classic
+;
+
+	lwz		r4,ClassicOffset[TD](rtoc)
+	lwz		r5,ClassicLength[TD](rtoc)
+
+;
+; Let's open the disk fragment!
+; Registers r4 and r5 are preset (Offset/Length)
+; r11 = &CloseConnection()
+; r12 = &GetDiskFragment()
+;
+
+LetsGo:
+	stw		r11,MyCloseConnection[TD](rtoc)	;This is the callback for closing
+	lwz		r3,16(r3)					;fragLocator.u.inSegs.fileSpec
+	li		r6,0						;fragName
+	li		r7,kDataForkCFragLocator	;LoadOptions
+	addi	r8,RTOC,MyConnectionID[TD]	;Where to put the connection ID
+	addi	r9,RTOC,MyMainProc[TD]		;Where to put the code address
+	li		r10,0						;Error message
+	bl		CallGlue					;Call the fragment loader
+	lwz		RTOC,20(SP)					;Restore TOC
+	lwz		r0,72(SP)					;Restore lr
+	addi	sp,sp,64
+	mtctr	r0							;Leave
+	bctr
+
+;
+; I can't talk to the system
+; I am screwed!!!
+;
+
+ImScrewed:
+	addi	sp,sp,64				;Fix the stack
+	li		r3,cfragNoLibraryErr	;Ok, you are screwed
+	blr								;The link register was never touched
+
+;
+; Start the hydrocarbon app
+; Actually call the app
+;
+;int start(void)
+;{
+;	int Error = 0;
+;	if (MyMainProc) {
+;		Error = MyMainProc();
+;	}
+;	return Error;
+;}
+;
+
+	CSECT	.start[PR]
+	
+	mflr	r0							;Prolog
+	lwz		r12,MyMainProc[TD](rtoc)	;Pointer to the app
+	stw		r0,8(SP)
+	cmplwi	r12,0
+	stwu	SP,-64(SP)
+	li		r3,0						;Assume no error
+	beq		NoStart						;Crap!
+	bl		CallGlue					;Call the app
+	lwz		RTOC,20(SP)					;Restore TOC
+NoStart:
+	lwz		r0,72(SP)					;Leave
+	addi	sp,sp,64
+	mtctr	r0
+	bctr
+	
+;
+; Terminate the hydrocarbon app
+; This is where I release the shared lib (The app)
+;
+;int terminate(void)
+;{
+;	int Error = 0;
+;	if (MyCloseConnection) {
+;		Error = MyConnection(MyCloseConnection);
+;	}
+;	return Error;
+;}
+;
+	CSECT	.terminate[PR]
+
+	mflr	r0
+	lwz		r12,MyCloseConnection[TD](rtoc)	;Carbon/Classic CloseConnection()
+	stw		r0,8(SP)
+	cmplwi	r12,0
+	stwu	SP,-64(SP)
+	li		r3,0							;Assume no error
+	beq		NoTerminate						;Crap!
+	addi	r3,RTOC,MyConnectionID[TD]		;My Connection ID (Pointer to the ID)
+	bl		CallGlue						;Call CloseConnection()
+	lwz		RTOC,20(SP)						;Restore TOC
+NoTerminate:
+	lwz		r0,72(sp)						;Leave
+	addi	sp,sp,64
+	mtctr	r0
+	bctr
+
+;
+; This code was ripped from the MSL library
+; It's the stub needed to do interfragment jumps
+;
+
+CallGlue:
+	lwz		r0,0(r12)		;Grab the function pointer from the TOC entry
+	stw		RTOC,20(SP)		;Save my current toc pointer
+	mtctr	r0				;Move the code pointer to the ctr register
+	lwz		RTOC,4(r12)		;Get the other fragments toc
+	bctr					;Jump to the code
+
+	END

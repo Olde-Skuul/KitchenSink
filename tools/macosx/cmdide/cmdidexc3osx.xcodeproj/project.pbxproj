@@ -1,0 +1,202 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22EAB625E5BAD1D49AB4CA94 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6061B328817055E8B2E193D6 /* AppKit.framework */; };
+		2A09D2A2A7C29333DDE40DE5 /* cmdide.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 114CAC144651F49D320512AB /* cmdide.cpp */; };
+		E5EF297A197E1F99001C362E /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5EF2979197E1F99001C362E /* Carbon.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		114CAC144651F49D320512AB /* cmdide.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cmdide.cpp; path = source/cmdide.cpp; sourceTree = SOURCE_ROOT; };
+		4BBA7DC2A47AF9B8E4E95DD0 /* cmdide */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cmdide; sourceTree = BUILT_PRODUCTS_DIR; };
+		53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = burger.toolxcoosx.xcconfig; path = xcode/burger.toolxcoosx.xcconfig; sourceTree = SDKS; };
+		6061B328817055E8B2E193D6 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E5EF2979197E1F99001C362E /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A41FA40AF4E2EA5034EAA5E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22EAB625E5BAD1D49AB4CA94 /* AppKit.framework in Frameworks */,
+				E5EF297A197E1F99001C362E /* Carbon.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CE489F4A9041625DE5927C3 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				114CAC144651F49D320512AB /* cmdide.cpp */,
+			);
+			path = source;
+			sourceTree = SOURCE_ROOT;
+		};
+		6555983C4FFDAFC88D6ED936 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5EF2979197E1F99001C362E /* Carbon.framework */,
+				6061B328817055E8B2E193D6 /* AppKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9796CE949CD3951E99BB35F6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4BBA7DC2A47AF9B8E4E95DD0 /* cmdide */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B05A6B173F018CA1D78007E2 /* cmdide */ = {
+			isa = PBXGroup;
+			children = (
+				6555983C4FFDAFC88D6ED936 /* Frameworks */,
+				9796CE949CD3951E99BB35F6 /* Products */,
+				4CE489F4A9041625DE5927C3 /* source */,
+				53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */,
+			);
+			name = cmdide;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		832E4F078B44E6A2FD9B1B07 /* cmdide */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 787EFEEE71AEA80499BB96CD /* Build configuration list for PBXNativeTarget "cmdide" */;
+			buildPhases = (
+				046E0E0EC5A3D8E1C56AD9F5 /* Sources */,
+				A41FA40AF4E2EA5034EAA5E6 /* Frameworks */,
+				0E0FAD012E61890794E64947 /* ShellScript */,
+				15E8F1D72B8BE0C13B4F7B52 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cmdide;
+			productName = cmdide;
+			productReference = 4BBA7DC2A47AF9B8E4E95DD0 /* cmdide */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1EDD0A5B0D139FEA7B815635 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 9327958F9B76D44B1EF3B9D3 /* Build configuration list for PBXProject "cmdidexc3osx" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B05A6B173F018CA1D78007E2 /* cmdide */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				832E4F078B44E6A2FD9B1B07 /* cmdide */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E0FAD012E61890794E64947 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -d ${SRCROOT}/bin ]; then mkdir ${SRCROOT}/bin; fi\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SRCROOT}/bin/${EXECUTABLE_NAME}${IDESUFFIX}${SUFFIX}\n";
+			showEnvVarsInLog = 0;
+		};
+		15E8F1D72B8BE0C13B4F7B52 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME}",
+			);
+			outputPaths = (
+				"${SDKS}/macosx/bin/${FINAL_OUTPUT}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Release\" ]; then\n${SDKS}/macosx/bin/p4 edit ${SDKS}/macosx/bin/${FINAL_OUTPUT}\n${CP} ${CONFIGURATION_BUILD_DIR}/${EXECUTABLE_NAME} ${SDKS}/macosx/bin/${FINAL_OUTPUT}\nfi\n\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		046E0E0EC5A3D8E1C56AD9F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2A09D2A2A7C29333DDE40DE5 /* cmdide.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0E9C5EF810BB84210927454B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53A745DDC21ECBC748B26AF9 /* burger.toolxcoosx.xcconfig */;
+			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+			};
+			name = Release;
+		};
+		27B29A5CCE0AB20F9705F2CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		787EFEEE71AEA80499BB96CD /* Build configuration list for PBXNativeTarget "cmdide" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27B29A5CCE0AB20F9705F2CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9327958F9B76D44B1EF3B9D3 /* Build configuration list for PBXProject "cmdidexc3osx" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E9C5EF810BB84210927454B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1EDD0A5B0D139FEA7B815635 /* Project object */;
+}
